@@ -13,13 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGw", "OcelotApiGw\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{433B030E-C0F3-4B50-B05C-089252A1A493}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.API", "ToDo.API\ToDoList.API.csproj", "{8ACDDD8A-0DA4-46DD-B6DB-0F9E7B1546B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.API", "ToDoList.API\ToDoList.API.csproj", "{8ACDDD8A-0DA4-46DD-B6DB-0F9E7B1546B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Application", "ToDo.Application\ToDoList.Application.csproj", "{352889A0-E3BC-4EE1-B7F1-629738AEC7B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Application", "ToDoList.Application\ToDoList.Application.csproj", "{352889A0-E3BC-4EE1-B7F1-629738AEC7B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Domain", "ToDo.Domain\ToDoList.Domain.csproj", "{471C2396-47E2-4366-B8FE-3808280CE40E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Domain", "ToDoList.Domain\ToDoList.Domain.csproj", "{471C2396-47E2-4366-B8FE-3808280CE40E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Infrastructure", "ToDo.Infrastructure\ToDoList.Infrastructure.csproj", "{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Infrastructure", "ToDoList.Infrastructure\ToDoList.Infrastructure.csproj", "{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
