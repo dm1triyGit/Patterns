@@ -10,4 +10,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Ocelot" Version="19.0.2" />
+  </ItemGroup>
+
 </Project>

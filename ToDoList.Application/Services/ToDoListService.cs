@@ -18,7 +18,7 @@ namespace ToDoList.Application.Services
             return _toDoListRepository.GetToDoItemsAsync(cancellation);
         }
 
-        public Task<int> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public Task CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
         {
             return _toDoListRepository.CreateToDoItemAsync(item, cancellation);
         }
