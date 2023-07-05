@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ToDoList.Application.Interfaces.Repositories;
 using ToDoList.Domain.Entities;
 using ToDoList.Infrastructure.DataAccess;
@@ -8,10 +9,12 @@ namespace ToDoList.Infrastructure.Repositories
     public class ToDoListRepository : IToDoListRepository
     {
         private readonly AppDbContext _context;
+        private readonly ILogger<ToDoListRepository> _logger;
 
-        public ToDoListRepository(AppDbContext context)
+        public ToDoListRepository(AppDbContext context, ILogger<ToDoListRepository> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<IReadOnlyCollection<ToDoItem>> GetToDoItemsAsync(CancellationToken cancellation)
@@ -24,7 +27,8 @@ namespace ToDoList.Infrastructure.Repositories
             var createdItem = await _context.ToDoItems.FindAsync(item.Id);
             if (createdItem != null)
             {
-                throw new Exception($"The Item with id: {item.Id} has already been created!");
+                _logger.LogWarning($"The Item with id: {item.Id} has already been created!");
+                return false;
             }
 
             await _context.ToDoItems.AddAsync(item, cancellation);
@@ -38,7 +42,8 @@ namespace ToDoList.Infrastructure.Repositories
             var itemToUpdate = await _context.ToDoItems.FindAsync(item.Id);
             if (itemToUpdate == null)
             {
-                throw new Exception($"The Item with id: {item.Id} hasn't been created yet!");
+                _logger.LogWarning($"The Item with id: {item.Id} hasn't been created yet!");
+                return false;
             }
 
             _context.ToDoItems.Update(item);
@@ -52,7 +57,8 @@ namespace ToDoList.Infrastructure.Repositories
             var item = await _context.ToDoItems.FindAsync(id);
             if (item == null)
             {
-                throw new Exception($"The Item with id: {id} doesn't exist!");
+                _logger.LogWarning($"The Item with id: {id} doesn't exist!");
+                return false;
             }
 
             _context.ToDoItems.Remove(item);
