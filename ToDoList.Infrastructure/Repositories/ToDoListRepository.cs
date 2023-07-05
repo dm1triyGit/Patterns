@@ -19,7 +19,7 @@ namespace ToDoList.Infrastructure.Repositories
             return (await _context.ToDoItems.ToArrayAsync(cancellation)).AsReadOnly();
         }
 
-        public async Task CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public async Task<bool> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
         {
             var createdItem = await _context.ToDoItems.FindAsync(item.Id);
             if (createdItem != null)
@@ -28,10 +28,12 @@ namespace ToDoList.Infrastructure.Repositories
             }
 
             await _context.ToDoItems.AddAsync(item, cancellation);
-            await _context.SaveChangesAsync(cancellation);
+            var created = await _context.SaveChangesAsync(cancellation);
+
+            return created > 0;
         }
 
-        public async Task UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public async Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
         {
             var itemToUpdate = await _context.ToDoItems.FindAsync(item.Id);
             if (itemToUpdate == null)
@@ -40,10 +42,12 @@ namespace ToDoList.Infrastructure.Repositories
             }
 
             _context.ToDoItems.Update(item);
-            await _context.SaveChangesAsync(cancellation);
+            var updated = await _context.SaveChangesAsync(cancellation);
+
+            return updated > 0;
         }
 
-        public async Task DeleteToDoItemAsync(int id, CancellationToken cancellation)
+        public async Task<bool> DeleteToDoItemAsync(int id, CancellationToken cancellation)
         {
             var item = await _context.ToDoItems.FindAsync(id);
             if (item == null)
@@ -52,7 +56,9 @@ namespace ToDoList.Infrastructure.Repositories
             }
 
             _context.ToDoItems.Remove(item);
-            await _context.SaveChangesAsync(cancellation);
+            var deleted = await _context.SaveChangesAsync(cancellation);
+
+            return deleted > 0;
         }
     }
 }

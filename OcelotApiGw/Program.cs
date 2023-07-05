@@ -15,6 +15,7 @@ if (app.Environment.IsLocalDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
 app.UseRouting();
 await app.UseOcelot();
 

@@ -25,22 +25,25 @@ namespace ToDoList.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Create(ToDoItem item, CancellationToken cancellation)
         {
-            await _toDoListService.CreateToDoItemAsync(item, cancellation);
-            return Ok();
+            var isCreated = await _toDoListService.CreateToDoItemAsync(item, cancellation);
+
+            return isCreated ? Ok() : BadRequest();
         }
 
         [HttpPut("[action]")]
         public async Task<IActionResult> Update(ToDoItem item, CancellationToken cancellation)
         {
-            await _toDoListService.UpdateToDoItemAsync(item, cancellation);
-            return Ok();
+            var isUpdated = await _toDoListService.UpdateToDoItemAsync(item, cancellation);
+
+            return isUpdated ? Ok() : BadRequest();
         }
 
         [HttpDelete("[action]")]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellation)
         {
-            await _toDoListService.DeleteToDoItemAsync(id, cancellation);
-            return Ok();
+            var isDeleted = await _toDoListService.DeleteToDoItemAsync(id, cancellation);
+
+            return isDeleted ? Ok() : BadRequest();
         }
     }
 }

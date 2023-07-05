@@ -5,8 +5,8 @@ namespace ToDoList.Application.Interfaces.Repositories
     public interface IToDoListRepository
     {
         Task<IReadOnlyCollection<ToDoItem>> GetToDoItemsAsync(CancellationToken cancellation);
-        Task CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation);
-        Task UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation);
-        Task DeleteToDoItemAsync(int id, CancellationToken cancellation);
+        Task<bool> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation);
+        Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation);
+        Task<bool> DeleteToDoItemAsync(int id, CancellationToken cancellation);
     }
 }

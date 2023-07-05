@@ -29,6 +29,10 @@ if (app.Environment.IsDevelopment())
         await initialiser.SeedAsync();
     }
 }
+else
+{
+    //app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger)));
+}
 app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger)));
 
 app.UseStaticFiles();
