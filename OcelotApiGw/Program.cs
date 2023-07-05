@@ -1,5 +1,6 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using OcelotApiGw.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,7 @@ builder.Services.AddOcelot();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsLocalDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }

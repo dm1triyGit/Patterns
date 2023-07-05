@@ -1,3 +1,5 @@
+using NLog.Web;
+using ToDoList.API.Extensions;
 using ToDoList.Infrastructure.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +11,12 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+builder.Logging.ClearProviders();
+builder.WebHost.UseNLog();
 
+var app = builder.Build();
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -24,6 +29,7 @@ if (app.Environment.IsDevelopment())
         await initialiser.SeedAsync();
     }
 }
+app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger)));
 
 app.UseStaticFiles();
 app.MapControllers();

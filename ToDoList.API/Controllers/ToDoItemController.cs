@@ -16,9 +16,10 @@ namespace ToDoList.API.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IReadOnlyCollection<ToDoItem>> Get(CancellationToken cancellation) 
+        public async Task<IActionResult> Get(CancellationToken cancellation) 
         {
-            return await _toDoListService.GetToDoItemsAsync(cancellation);
+            var items = await _toDoListService.GetToDoItemsAsync(cancellation);
+            return Ok(items);
         }
 
         [HttpPost("[action]")]
