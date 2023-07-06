@@ -17,6 +17,15 @@ if (app.Environment.IsLocalDevelopment())
 }
 
 app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGet("/", async context =>
+    {
+        await context.Response.WriteAsync("Hello I'm OcelotApiGateway!");
+    });
+});
+
 await app.UseOcelot();
 
 app.Run();

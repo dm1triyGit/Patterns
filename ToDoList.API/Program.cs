@@ -35,6 +35,8 @@ else
 }
 app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger)));
 
+app.Map("/", () => "Hello I'm TodoServiceApi");
+
 app.UseStaticFiles();
 app.MapControllers();
 
