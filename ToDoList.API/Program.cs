@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Logging.ClearProviders();
 builder.WebHost.UseNLog();
+builder.Services.AddCors();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -35,6 +36,7 @@ else
 }
 app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger)));
 
+app.UseCors(builder => builder.AllowAnyOrigin());
 app.Map("/", () => "Hello I'm TodoServiceApi");
 
 app.UseStaticFiles();
