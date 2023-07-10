@@ -1,3 +1,4 @@
+import { Layout } from '@app/components';
 import { HomePage, TodosPage } from '@app/pages';
 import { RouteObject, createBrowserRouter } from 'react-router-dom';
 
@@ -7,11 +8,19 @@ export const TODOS_PAGE = '/todos';
 const routes: RouteObject[] = [
   {
     path: HOME_PAGE,
-    element: <HomePage />,
+    element: (
+      <Layout>
+        <HomePage />
+      </Layout>
+    ),
   },
   {
     path: TODOS_PAGE,
-    element: <TodosPage />,
+    element: (
+      <Layout>
+        <TodosPage />
+      </Layout>
+    ),
   },
 ];
 
