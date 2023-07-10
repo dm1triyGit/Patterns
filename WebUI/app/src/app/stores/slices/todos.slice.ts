@@ -1,11 +1,12 @@
+import { ITodo } from '@app/shared/types';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface TodosState {
-  list: string[];
+  list: ITodo[];
 }
 
 const initialState: TodosState = {
-  list: ['todo1', 'todo2'],
+  list: [],
 };
 
 export const todosSlice = createSlice({
