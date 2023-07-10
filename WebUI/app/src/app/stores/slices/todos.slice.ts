@@ -5,7 +5,7 @@ export interface TodosState {
 }
 
 const initialState: TodosState = {
-  list: ['todo1', 'todo2'],
+  list: [],
 };
 
 export const todosSlice = createSlice({

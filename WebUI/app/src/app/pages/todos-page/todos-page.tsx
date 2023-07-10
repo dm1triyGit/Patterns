@@ -1,17 +1,21 @@
-import { useAppSelector } from '@app/stores';
+import { useGetTodosQuery } from '@app/stores/api';
 
 export const TodosPage = (): JSX.Element => {
-  const { list } = useAppSelector(state => state.todos);
+  const { isLoading, isError, data } = useGetTodosQuery();
 
   return (
     <>
       <section>
         <h1>Todos Page Component</h1>
-        <ul>
-          {list.map(item => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
+        {isLoading && <span>Loading...</span>}
+        {isError && <span>ERROR</span>}
+        {data && (
+          <ul>
+            {data.map((item: any) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        )}
       </section>
     </>
   );
