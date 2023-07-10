@@ -11,8 +11,8 @@ export const TodosPage = (): JSX.Element => {
         {isError && <span>ERROR</span>}
         {data && (
           <ul>
-            {data.map((item: any) => (
-              <li key={item}>{item}</li>
+            {data.map(todo => (
+              <li key={todo.id}>{todo.title}</li>
             ))}
           </ul>
         )}
