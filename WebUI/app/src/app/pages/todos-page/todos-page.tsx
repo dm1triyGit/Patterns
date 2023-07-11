@@ -1,30 +1,35 @@
-import { Fab, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
+import {
+  Fab,
+  Grid,
+  LinearProgress,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
+import { useEffect } from 'react';
 import { StyledSection } from '@app/shared/assets/styled-components';
 import AddIcon from '@mui/icons-material/Add';
-import { TodoCard, TodoModal } from './components';
+import { TodoForm, TodoModal, TodosList } from './components';
 import { useGetTodosQuery } from '@app/stores/api';
 import { Toaster } from '@app/components';
-import { ITodo } from '@app/shared/types';
-import { useAppDispatch } from '@app/stores';
-import { toggleModalState } from '@app/stores/slices';
+import { useAppDispatch, useAppSelector } from '@app/stores';
+import { saveTodos, toggleModalState } from '@app/stores/slices';
 import { Breakpoints } from '@app/shared/assets';
 
 export const TodosPage = (): JSX.Element => {
-  const { isLoading, isError, data } = useGetTodosQuery();
+  const { isLoading, isError, data, error, isFetching } = useGetTodosQuery();
   const dispatch = useAppDispatch();
   const isTablet = useMediaQuery(Breakpoints.TABLET);
+  const { editedItem } = useAppSelector(state => state.todos);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(saveTodos(data));
+    }
+  }, [data]);
 
   const openModal = (): void => {
     dispatch(toggleModalState({ state: true }));
   };
-
-  const sortedTodos = (list: ITodo[]): ITodo[] =>
-    list
-      .slice()
-      .sort(
-        (a, b) =>
-          new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime(),
-      );
 
   return (
     <>
@@ -34,15 +39,13 @@ export const TodosPage = (): JSX.Element => {
             <Typography variant="h3" textAlign="center" sx={{ mb: 2 }}>
               Todos
             </Typography>
-            {isLoading && <span>Loading...</span>}
-            {isError && <span>ERROR</span>}
-            {data && (
-              <Stack spacing={2}>
-                {sortedTodos(data).map(todo => (
-                  <TodoCard todo={todo} key={todo.id} />
-                ))}
-              </Stack>
+            {isLoading || isFetching ? <LinearProgress /> : null}
+            {isError && (
+              <Typography color="error" variant="h5" textAlign="center">
+                ERROR {`: ${error ? JSON.stringify(error) : ''}`}
+              </Typography>
             )}
+            {data && <TodosList />}
           </Grid>
           <Grid
             item
@@ -51,7 +54,10 @@ export const TodosPage = (): JSX.Element => {
             lg={4}
             sx={{ display: { xs: 'none', md: 'unset' } }}
           >
-            Aside Column
+            <Typography variant="h5" sx={{ mb: 2 }}>
+              {editedItem ? 'Редактировать' : 'Создать новую'}
+            </Typography>
+            <TodoForm />
           </Grid>
         </Grid>
       </StyledSection>

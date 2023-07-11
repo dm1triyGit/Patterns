@@ -1,47 +1,37 @@
 import { InputComponent } from '@app/components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { Box, Button } from '@mui/material';
 import { useAppSelector } from '@app/stores';
-import { useCreateTodoMutation, useEditTodoMutation } from '@app/stores/api';
-import { ITodo } from '@app/shared/types';
+import { useEffect } from 'react';
+import { TodoFormModel, todoSchema } from './todo-schema';
+import { useSubmitForm } from '../hooks';
 
-interface TodoForm {
-  title: string;
-  comment: string;
-  isCompleted: boolean;
-}
-
-const schema = yup.object({
-  title: yup.string().required(),
-  comment: yup.string(),
-  isCompleted: yup.boolean(),
-});
+const defaultValues: TodoFormModel = {
+  title: '',
+  comment: '',
+  isCompleted: false,
+};
 
 export const TodoForm = (): JSX.Element => {
-  const [createTodo, createResponse] = useCreateTodoMutation();
-  const [editTodo, editResponse] = useEditTodoMutation();
-
   const { editedItem } = useAppSelector(state => state.todos);
-  const { control, reset, formState, handleSubmit } = useForm<TodoForm>({
-    defaultValues: {
-      title: editedItem?.title ?? '',
-      comment: editedItem?.comment ?? '',
-      isCompleted: false,
-    },
-    resolver: yupResolver(schema),
-  });
+  const { control, reset, formState, handleSubmit, setValue } =
+    useForm<TodoFormModel>({
+      defaultValues,
+      resolver: yupResolver(todoSchema),
+    });
 
-  const onSubmit = (data: TodoForm): void => {
-    if (!!editedItem) {
-      editTodo(data).then(() => reset());
-      return;
+  useEffect(() => {
+    if (editedItem) {
+      setValue('title', editedItem.title);
+      setValue('comment', editedItem.comment);
     }
+  }, [editedItem]);
 
-    const newTodo: Omit<ITodo, 'id'> = { ...data, createdDate: new Date() };
-    createTodo(newTodo).then(() => reset());
-  };
+  const { onSubmit, resetEditForm } = useSubmitForm({
+    todo: editedItem,
+    resetForm: reset,
+  });
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
@@ -75,6 +65,11 @@ export const TodoForm = (): JSX.Element => {
       <Button type="submit" variant="contained">
         Сохранить
       </Button>
+      {editedItem && (
+        <Button color="warning" sx={{ ml: 2 }} onClick={resetEditForm}>
+          Сбросить
+        </Button>
+      )}
     </Box>
   );
 };

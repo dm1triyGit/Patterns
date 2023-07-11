@@ -22,14 +22,14 @@ export const todosApi = createApi({
       query: todo => ({
         url: 'todoitem/create',
         method: 'POST',
-        body: JSON.stringify(todo),
+        body: todo,
       }),
     }),
     editTodo: builder.mutation<void, Partial<ITodo>>({
       query: todo => ({
         url: 'todoitem/update',
         method: 'PUT',
-        body: JSON.stringify(todo),
+        body: todo,
       }),
     }),
   }),
@@ -40,4 +40,5 @@ export const {
   useDeleteTodoMutation,
   useCreateTodoMutation,
   useEditTodoMutation,
+  useLazyGetTodosQuery,
 } = todosApi;

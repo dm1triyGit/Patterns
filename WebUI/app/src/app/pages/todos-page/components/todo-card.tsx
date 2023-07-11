@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { ITodo } from '@app/shared/types';
-import { useDeleteTodoMutation } from '@app/stores/api';
+import { useDeleteTodoMutation, useLazyGetTodosQuery } from '@app/stores/api';
 import { Edit, Delete } from '@mui/icons-material';
 import {
   Card,
@@ -18,23 +17,32 @@ interface Props {
 }
 
 export const TodoCard = ({ todo }: Props): JSX.Element => {
-  const [deleteTodo, { status, isLoading, error }] = useDeleteTodoMutation();
+  const [deleteTodo, { isLoading }] = useDeleteTodoMutation();
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (status === 'rejected') {
-      dispatch(
-        setToaster({
-          message: JSON.stringify(error),
-          severety: 'error',
-          key: todo.id,
-        }),
-      );
-    }
-  }, [status]);
+  const [getTodos] = useLazyGetTodosQuery();
 
   const handleDeleteTodo = (id: number): void => {
-    deleteTodo(id);
+    deleteTodo(id)
+      .unwrap()
+      .then(() => {
+        getTodos();
+        dispatch(
+          setToaster({
+            message: 'Запись удалена',
+            severety: 'warning',
+            key: todo.id,
+          }),
+        );
+      })
+      .catch(reson => {
+        dispatch(
+          setToaster({
+            message: JSON.stringify(reson),
+            severety: 'error',
+            key: todo.id,
+          }),
+        );
+      });
   };
 
   const handleEditTodo = (todo: ITodo): void => {

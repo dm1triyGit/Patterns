@@ -182,7 +182,7 @@ export const StyledInputComponent = styled(Input, {
           : theme.palette.text.primary
       }`,
       borderRadius: theme.shape.borderRadius,
-      color: theme.palette.text.secondary,
+      color: theme.palette.text.primary,
       boxShadow: '0px 4px 16px rgba(7, 20, 48, 0.04)',
 
       '&:hover': {
