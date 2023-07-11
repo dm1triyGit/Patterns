@@ -13,13 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "OcelotApiGw\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{433B030E-C0F3-4B50-B05C-089252A1A493}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.API", "ToDoList.API\ToDoList.API.csproj", "{8ACDDD8A-0DA4-46DD-B6DB-0F9E7B1546B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.API", "Services\ToDoList\ToDoList.API\ToDoList.API.csproj", "{8ACDDD8A-0DA4-46DD-B6DB-0F9E7B1546B5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Application", "ToDoList.Application\ToDoList.Application.csproj", "{352889A0-E3BC-4EE1-B7F1-629738AEC7B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Application", "Services\ToDoList\ToDoList.Application\ToDoList.Application.csproj", "{352889A0-E3BC-4EE1-B7F1-629738AEC7B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Domain", "ToDoList.Domain\ToDoList.Domain.csproj", "{471C2396-47E2-4366-B8FE-3808280CE40E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Domain", "Services\ToDoList\ToDoList.Domain\ToDoList.Domain.csproj", "{471C2396-47E2-4366-B8FE-3808280CE40E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Infrastructure", "ToDoList.Infrastructure\ToDoList.Infrastructure.csproj", "{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Infrastructure", "Services\ToDoList\ToDoList.Infrastructure\ToDoList.Infrastructure.csproj", "{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
