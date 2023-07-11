@@ -1,17 +1,9 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { CssBaseline, PaletteMode } from "@mui/material";
-import { createTheme, Theme, ThemeProvider } from "@mui/material/styles";
-import { StorageKeys } from "@app/shared/assets";
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { CssBaseline, PaletteMode } from '@mui/material';
+import { createTheme, Theme, ThemeProvider } from '@mui/material/styles';
+import { StorageKeys } from '@app/shared/assets';
 
-declare module "@mui/material/styles" {
-  interface Palette {
-    alt: { beje: string; lightBlue: string };
-    misc: Palette["primary"];
-  }
-  interface PaletteOptions {
-    alt: { beje: string; lightBlue: string };
-    misc: PaletteOptions["primary"];
-  }
+declare module '@mui/material/styles' {
   interface BreakpointOverrides {
     lmd: true;
   }
@@ -33,7 +25,7 @@ export function useCustomTheme(): Partial<ContextProps> {
 }
 
 export const ThemeStoreProvider = ({ children }: Props): JSX.Element => {
-  const [mode, setMode] = useState<PaletteMode>("light");
+  const [mode, setMode] = useState<PaletteMode>('light');
 
   useEffect(() => {
     const storedTheme = localStorage.getItem(StorageKeys.THEME) as PaletteMode;
@@ -58,48 +50,14 @@ export const ThemeStoreProvider = ({ children }: Props): JSX.Element => {
         },
         palette: {
           mode,
-          primary: {
-            main: "#3FC3D0",
-            light: "#B1EBF0",
-            dark: "#12A5B3",
-            contrastText: "#ffffff",
-          },
-          text: {
-            primary: "#071530",
-            secondary: "#848998",
-            disabled: "#B9BFCC",
-          },
-          secondary: {
-            main: "#203E7A",
-            light: "#284E99",
-            dark: "#172D58",
-          },
-          background: {
-            default: "#ffffff",
-          },
-          alt: {
-            beje: "#FCF7F3",
-            lightBlue: "#EEFAFB",
-          },
-          misc: {
-            main: "#F0FBFB",
-            light: "#F6F8FB",
-            dark: "#DDE3EF",
-          },
-          error: {
-            main: "#EB5E55",
-          },
-          success: {
-            main: "#1B9D46",
-          },
         },
       }),
-    [mode]
+    [mode],
   );
 
   const toggleColorMode = (): void => {
-    setMode((prev) => {
-      const newMode = prev === "light" ? "dark" : "light";
+    setMode(prev => {
+      const newMode = prev === 'light' ? 'dark' : 'light';
       localStorage.setItem(StorageKeys.THEME, newMode);
 
       return newMode;
@@ -112,7 +70,7 @@ export const ThemeStoreProvider = ({ children }: Props): JSX.Element => {
       toggleColorMode,
       theme,
     }),
-    [mode, theme]
+    [mode, theme],
   );
 
   return (

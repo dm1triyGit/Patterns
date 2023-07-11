@@ -1,12 +1,17 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import { toasterReducer, todosReducer } from './slices';
+import { appsReducer, toasterReducer, todosReducer } from './slices';
+import { todosApi } from './api';
 
 export const store = configureStore({
   reducer: {
     todos: todosReducer,
     toaster: toasterReducer,
+    apps: appsReducer,
+    [todosApi.reducerPath]: todosApi.reducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(todosApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Configuration.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", true, true);
 builder.Services.AddOcelot();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -14,6 +15,10 @@ var app = builder.Build();
 if (app.Environment.IsLocalDevelopment())
 {
     app.UseDeveloperExceptionPage();
+
+    app.UseCors(builder => builder.AllowAnyOrigin()
+                                  .AllowAnyMethod()
+                                  .AllowAnyHeader());
 }
 
 app.UseRouting();
