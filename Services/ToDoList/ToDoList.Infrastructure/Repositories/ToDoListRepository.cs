@@ -39,7 +39,10 @@ namespace ToDoList.Infrastructure.Repositories
 
         public async Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
         {
-            var itemToUpdate = await _context.ToDoItems.FindAsync(item.Id);
+            var itemToUpdate = await _context.ToDoItems
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == item.Id, cancellation);
+
             if (itemToUpdate == null)
             {
                 _logger.LogWarning($"The Item with id: {item.Id} hasn't been created yet!");
