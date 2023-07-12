@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 Patterns.sln.EasyRun.json
+
+*.db
+*.db-*

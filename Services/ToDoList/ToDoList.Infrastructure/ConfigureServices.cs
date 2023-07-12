@@ -18,7 +18,8 @@ public static class ConfigureServices
         }
         else
         {
-            //add sql db
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(configuration.GetConnectionString("SQLiteConnection")));
         }
 
         services.AddScoped<AppDbContextInitialiser>();
