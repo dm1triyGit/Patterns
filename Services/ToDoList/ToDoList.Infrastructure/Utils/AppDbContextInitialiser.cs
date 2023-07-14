@@ -34,6 +34,19 @@ namespace ToDoList.Infrastructure.Utils
 
         public async Task SeedAsync() 
         {
+            try
+            {
+                await TrySeedAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while seeding the database.");
+                throw;
+            }
+        }
+
+        private async Task TrySeedAsync()
+        {
             if (!_context.ToDoItems.Any())
             {
                 var toDoList = new List<ToDoItem>()
