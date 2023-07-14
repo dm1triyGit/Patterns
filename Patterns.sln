@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Domain", "Services
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Infrastructure", "Services\ToDoList\ToDoList.Infrastructure\ToDoList.Infrastructure.csproj", "{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDoList.ReminderService", "ToDoList.ReminderService", "{F23B3953-6CAC-4A51-B834-1A4099B3DD2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.ReminderWorker", "ToDoList.ReminderWorker\ToDoList.ReminderWorker.csproj", "{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,8 @@ Global
 		{352889A0-E3BC-4EE1-B7F1-629738AEC7B1} = {66BD651C-3AF1-4909-A86D-170076F8F4C2}
 		{471C2396-47E2-4366-B8FE-3808280CE40E} = {66BD651C-3AF1-4909-A86D-170076F8F4C2}
 		{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE} = {66BD651C-3AF1-4909-A86D-170076F8F4C2}
+		{F23B3953-6CAC-4A51-B834-1A4099B3DD2E} = {433B030E-C0F3-4B50-B05C-089252A1A493}
+		{A59FB274-CAFA-433E-A59F-CD5B5D6602A8} = {F23B3953-6CAC-4A51-B834-1A4099B3DD2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8256053D-5974-45BE-AE9D-173D9A0D6DFB}
