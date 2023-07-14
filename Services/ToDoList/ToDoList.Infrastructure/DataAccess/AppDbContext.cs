@@ -8,6 +8,7 @@ namespace ToDoList.Infrastructure.DataAccess
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<ToDoItem> ToDoItems { get; set; }

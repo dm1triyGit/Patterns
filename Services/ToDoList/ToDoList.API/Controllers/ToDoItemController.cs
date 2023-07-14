@@ -25,9 +25,11 @@ namespace ToDoList.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Create(ToDoItem item, CancellationToken cancellation)
         {
-            var isCreated = await _toDoListService.CreateToDoItemAsync(item, cancellation);
+            var createdItem = await _toDoListService.CreateToDoItemAsync(item, cancellation);
 
-            return isCreated ? Ok() : BadRequest();
+            return createdItem != null
+                ? Ok(createdItem)
+                : BadRequest();
         }
 
         [HttpPut("[action]")]
