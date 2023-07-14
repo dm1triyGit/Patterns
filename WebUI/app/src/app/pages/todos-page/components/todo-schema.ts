@@ -2,8 +2,8 @@ import * as yup from 'yup';
 
 export interface TodoFormModel {
   title: string;
-  comment: string;
-  isCompleted: boolean;
+  comment: string | undefined;
+  isCompleted: boolean | undefined;
 }
 
 export const todoSchema = yup.object({

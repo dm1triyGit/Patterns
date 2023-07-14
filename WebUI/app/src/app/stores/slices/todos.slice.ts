@@ -36,8 +36,29 @@ export const todosSlice = createSlice({
         );
       state.list = sorted;
     },
+    deleteStoredTodo: (state, { payload }: PayloadAction<number>) => {
+      state.list = state.list.filter(({ id }) => id !== payload);
+    },
+    editStoredTodo: (state, { payload }: PayloadAction<Partial<ITodo>>) => {
+      state.list = state.list.map(item => {
+        if (item.id === payload.id) {
+          return { ...item, ...payload };
+        }
+
+        return { ...item };
+      });
+    },
+    createNewTodo: (state, { payload }: PayloadAction<ITodo>) => {
+      state.list.push(payload);
+    },
   },
 });
 
 export const todosReducer = todosSlice.reducer;
-export const { toggleModalState, saveTodos } = todosSlice.actions;
+export const {
+  toggleModalState,
+  saveTodos,
+  deleteStoredTodo,
+  editStoredTodo,
+  createNewTodo,
+} = todosSlice.actions;

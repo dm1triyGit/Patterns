@@ -1,5 +1,5 @@
 import { ITodo } from '@app/shared/types';
-import { useDeleteTodoMutation, useLazyGetTodosQuery } from '@app/stores/api';
+import { useDeleteTodoMutation } from '@app/stores/api';
 import { Edit, Delete } from '@mui/icons-material';
 import {
   Card,
@@ -9,7 +9,11 @@ import {
   Button,
 } from '@mui/material';
 import { useAppDispatch } from '@app/stores';
-import { setToaster, toggleModalState } from '@app/stores/slices';
+import {
+  deleteStoredTodo,
+  setToaster,
+  toggleModalState,
+} from '@app/stores/slices';
 import { CardLoader } from './card-loader';
 
 interface Props {
@@ -19,13 +23,12 @@ interface Props {
 export const TodoCard = ({ todo }: Props): JSX.Element => {
   const [deleteTodo, { isLoading }] = useDeleteTodoMutation();
   const dispatch = useAppDispatch();
-  const [getTodos] = useLazyGetTodosQuery();
 
   const handleDeleteTodo = (id: number): void => {
     deleteTodo(id)
       .unwrap()
       .then(() => {
-        getTodos();
+        dispatch(deleteStoredTodo(id));
         dispatch(
           setToaster({
             message: 'Запись удалена',

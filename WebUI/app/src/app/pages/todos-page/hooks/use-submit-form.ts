@@ -1,13 +1,14 @@
 import { ITodo } from '@app/shared/types';
 import { TodoFormModel } from '../components';
-import {
-  useCreateTodoMutation,
-  useEditTodoMutation,
-  useLazyGetTodosQuery,
-} from '@app/stores/api';
+import { useCreateTodoMutation, useEditTodoMutation } from '@app/stores/api';
 import { useAppDispatch } from '@app/stores';
 import { UseFormReset } from 'react-hook-form';
-import { setToaster, toggleModalState } from '@app/stores/slices';
+import {
+  createNewTodo,
+  editStoredTodo,
+  setToaster,
+  toggleModalState,
+} from '@app/stores/slices';
 
 interface HookProps {
   todo: ITodo | null;
@@ -22,7 +23,6 @@ interface HookData {
 export const useSubmitForm = ({ todo, resetForm }: HookProps): HookData => {
   const [createTodo] = useCreateTodoMutation();
   const [editTodo] = useEditTodoMutation();
-  const [getTodos] = useLazyGetTodosQuery();
   const dispatch = useAppDispatch();
 
   const resetEditForm = (): void => {
@@ -35,11 +35,12 @@ export const useSubmitForm = ({ todo, resetForm }: HookProps): HookData => {
       editTodo({
         ...data,
         createdDate: todo.createdDate,
+        id: todo.id,
       })
         .unwrap()
         .then(() => {
           resetForm();
-          getTodos();
+          dispatch(editStoredTodo({ ...data, id: todo.id }));
           dispatch(toggleModalState({ state: false }));
           dispatch(
             setToaster({
@@ -63,12 +64,12 @@ export const useSubmitForm = ({ todo, resetForm }: HookProps): HookData => {
       return;
     }
 
-    const newTodo: Omit<ITodo, 'id'> = { ...data, createdDate: new Date() };
+    const newTodo: Partial<ITodo> = { ...data, createdDate: new Date() };
     createTodo(newTodo)
       .unwrap()
-      .then(() => {
+      .then(res => {
         resetForm();
-        getTodos();
+        dispatch(createNewTodo(res));
         dispatch(toggleModalState({ state: false }));
         dispatch(
           setToaster({

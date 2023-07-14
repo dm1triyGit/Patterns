@@ -18,7 +18,7 @@ export const todosApi = createApi({
         method: 'DELETE',
       }),
     }),
-    createTodo: builder.mutation<void, Partial<ITodo>>({
+    createTodo: builder.mutation<ITodo, Partial<ITodo>>({
       query: todo => ({
         url: 'todoitem/create',
         method: 'POST',
