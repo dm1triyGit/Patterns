@@ -7,6 +7,8 @@ import {
   Typography,
   CardActions,
   Button,
+  Box,
+  Checkbox,
 } from '@mui/material';
 import { useAppDispatch } from '@app/stores';
 import {
@@ -15,6 +17,7 @@ import {
   toggleModalState,
 } from '@app/stores/slices';
 import { CardLoader } from './card-loader';
+import { useHandleComplete } from '../hooks';
 
 interface Props {
   todo: ITodo;
@@ -23,6 +26,9 @@ interface Props {
 export const TodoCard = ({ todo }: Props): JSX.Element => {
   const [deleteTodo, { isLoading }] = useDeleteTodoMutation();
   const dispatch = useAppDispatch();
+  const { setCompleted, completed } = useHandleComplete({
+    todo,
+  });
 
   const handleDeleteTodo = (id: number): void => {
     deleteTodo(id)
@@ -52,6 +58,10 @@ export const TodoCard = ({ todo }: Props): JSX.Element => {
     dispatch(toggleModalState({ state: true, item: todo }));
   };
 
+  const handleCompleteTask = (): void => {
+    setCompleted(prev => !prev);
+  };
+
   return (
     <Card
       sx={{ minWidth: 275, position: 'relative' }}
@@ -59,16 +69,36 @@ export const TodoCard = ({ todo }: Props): JSX.Element => {
       elevation={4}
     >
       {isLoading && <CardLoader />}
-      <CardContent>
-        {todo.createdDate && (
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {new Date(todo.createdDate).toLocaleDateString()}
-          </Typography>
-        )}
-        <Typography variant="h5">{todo.title}</Typography>
-        {todo.comment && (
-          <Typography variant="body2">{todo.comment}</Typography>
-        )}
+      <CardContent sx={{ display: 'grid', gridTemplateColumns: '4fr 1fr' }}>
+        <Box className="card-left">
+          {todo.createdDate && (
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              {new Date(todo.createdDate).toLocaleDateString()}
+            </Typography>
+          )}
+          <Typography variant="h5">{todo.title}</Typography>
+          {todo.comment && (
+            <Typography variant="body2">{todo.comment}</Typography>
+          )}
+        </Box>
+        <Box
+          className="card-right"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Checkbox
+            size="medium"
+            checked={completed}
+            onChange={handleCompleteTask}
+          />
+        </Box>
       </CardContent>
       <CardActions sx={{ justifyContent: 'space-between' }}>
         <Button
