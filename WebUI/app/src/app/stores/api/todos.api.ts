@@ -9,7 +9,36 @@ export const todosApi = createApi({
     getTodos: builder.query<ITodo[], void>({
       query: () => 'todoitem/get',
     }),
+    deleteTodo: builder.mutation<void, number>({
+      query: id => ({
+        url: 'todoitem/delete',
+        params: {
+          id,
+        },
+        method: 'DELETE',
+      }),
+    }),
+    createTodo: builder.mutation<ITodo, Partial<ITodo>>({
+      query: todo => ({
+        url: 'todoitem/create',
+        method: 'POST',
+        body: todo,
+      }),
+    }),
+    editTodo: builder.mutation<void, Partial<ITodo>>({
+      query: todo => ({
+        url: 'todoitem/update',
+        method: 'PUT',
+        body: todo,
+      }),
+    }),
   }),
 });
 
-export const { useGetTodosQuery } = todosApi;
+export const {
+  useGetTodosQuery,
+  useDeleteTodoMutation,
+  useCreateTodoMutation,
+  useEditTodoMutation,
+  useLazyGetTodosQuery,
+} = todosApi;

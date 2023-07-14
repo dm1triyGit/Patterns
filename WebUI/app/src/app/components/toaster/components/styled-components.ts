@@ -1,6 +1,8 @@
 import { Snackbar, styled } from '@mui/material';
 
 export const StyledSnackbar = styled(Snackbar)(({ theme }) => ({
+  maxWidth: 250,
+
   [theme.breakpoints.up('sm')]: {
     right: theme.spacing(3),
   },
