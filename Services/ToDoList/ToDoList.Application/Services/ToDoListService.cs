@@ -21,12 +21,12 @@ namespace ToDoList.Application.Services
             return _toDoListRepository.GetToDoItemsAsync(cancellation);
         }
 
-        public async Task<bool> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public async Task<ToDoItem?> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
         {
             if (item == null)
             {
                 _logger.LogWarning("The Item being created must not be null!");
-                return false;
+                return null;
             }
 
             return await _toDoListRepository.CreateToDoItemAsync(item, cancellation);

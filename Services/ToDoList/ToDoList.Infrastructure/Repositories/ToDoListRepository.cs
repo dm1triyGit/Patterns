@@ -22,24 +22,27 @@ namespace ToDoList.Infrastructure.Repositories
             return (await _context.ToDoItems.ToArrayAsync(cancellation)).AsReadOnly();
         }
 
-        public async Task<bool> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public async Task<ToDoItem?> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
         {
             var createdItem = await _context.ToDoItems.FindAsync(item.Id);
             if (createdItem != null)
             {
                 _logger.LogWarning($"The Item with id: {item.Id} has already been created!");
-                return false;
+                return null;
             }
 
             await _context.ToDoItems.AddAsync(item, cancellation);
             var created = await _context.SaveChangesAsync(cancellation);
 
-            return created > 0;
+            return created > 0 ? item : null;
         }
 
         public async Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
         {
-            var itemToUpdate = await _context.ToDoItems.FindAsync(item.Id);
+            var itemToUpdate = await _context.ToDoItems
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == item.Id, cancellation);
+
             if (itemToUpdate == null)
             {
                 _logger.LogWarning($"The Item with id: {item.Id} hasn't been created yet!");

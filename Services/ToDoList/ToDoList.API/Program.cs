@@ -27,6 +27,7 @@ if (app.Environment.IsDevelopment())
     using (var scope = app.Services.CreateScope())
     {
         var initialiser = scope.ServiceProvider.GetRequiredService<AppDbContextInitialiser>();
+        await initialiser.InitialiseAsync();
         await initialiser.SeedAsync();
     }
 }
