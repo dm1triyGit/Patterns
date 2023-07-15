@@ -84,6 +84,11 @@ export const TodoCard = ({ todo }: Props): JSX.Element => {
           {todo.comment && (
             <Typography variant="body2">{todo.comment}</Typography>
           )}
+          {todo.reminderDate && (
+            <Typography sx={{ fontSize: 14, mt: 2 }} color="text.secondary">
+              Напоминание: {new Date(todo.reminderDate).toLocaleDateString()}
+            </Typography>
+          )}
         </Box>
         <Box
           className="card-right"
