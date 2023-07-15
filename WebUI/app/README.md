@@ -1,5 +1,1 @@
-## Patterns
-
-PWA
-localForage (IndexedDB, WebSQL, localStorage)
-vite
+## Patterns FE

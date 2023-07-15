@@ -73,47 +73,34 @@ export const StyledInputLabel = styled('label')(({ theme }) => ({
 
 export const StyledInputComponent = styled(Input, {
   shouldForwardProp: prop => !['limit', 'minHeight'].includes(prop.toString()),
-})<{ limit?: number; minHeight?: number }>(
-  ({ theme, color, limit, value, minHeight }) => {
-    const textLength = limit ? limit - (value as string).length : 0;
-    let counterColor = theme.palette.text.disabled;
+})<{ limit?: number; minHeight?: number }>(({ theme, color, minHeight }) => {
+  return {
+    display: 'flex',
+    padding: 0,
+    border: `1px solid ${
+      color === 'error'
+        ? theme.palette.error.light
+        : theme.palette.text.disabled
+    }`,
+    borderRadius: theme.shape.borderRadius,
+    color: theme.palette.text.primary,
+    boxShadow: '0px 4px 16px rgba(7, 20, 48, 0.04)',
 
-    if (textLength < 20 && textLength >= 0) {
-      counterColor = theme.palette.warning.light;
-    }
+    input: {
+      padding: theme.spacing(0, 2),
+      minHeight: 48,
+    },
 
-    if (textLength < 0) {
-      counterColor = theme.palette.error.main;
-    }
+    textarea: {
+      padding: theme.spacing(2),
+      minHeight: minHeight ?? 120,
+      boxSizing: 'border-box',
+    },
 
-    return {
-      display: 'flex',
-      padding: 0,
-      border: `1px solid ${
-        color === 'error'
-          ? theme.palette.error.light
-          : theme.palette.text.disabled
-      }`,
-      borderRadius: theme.shape.borderRadius,
-      color: theme.palette.text.primary,
-      boxShadow: '0px 4px 16px rgba(7, 20, 48, 0.04)',
-
+    [theme.breakpoints.up('lmd')]: {
       input: {
-        padding: theme.spacing(0, 2),
-        minHeight: 48,
+        minHeight: 56,
       },
-
-      textarea: {
-        padding: theme.spacing(2),
-        minHeight: minHeight ?? 120,
-        boxSizing: 'border-box',
-      },
-
-      [theme.breakpoints.up('lmd')]: {
-        input: {
-          minHeight: 56,
-        },
-      },
-    };
-  },
-);
+    },
+  };
+});

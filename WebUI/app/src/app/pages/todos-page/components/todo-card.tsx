@@ -16,7 +16,6 @@ import {
   setToaster,
   toggleModalState,
 } from '@app/stores/slices';
-import { CardLoader } from './card-loader';
 import { useHandleComplete } from '../hooks';
 
 interface Props {
@@ -68,7 +67,6 @@ export const TodoCard = ({ todo }: Props): JSX.Element => {
       key={todo.id}
       elevation={4}
     >
-      {isLoading && <CardLoader />}
       <CardContent sx={{ display: 'grid', gridTemplateColumns: '4fr 1fr' }}>
         <Box className="card-left">
           {todo.createdDate && (
