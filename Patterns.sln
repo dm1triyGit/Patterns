@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Domain", "Services
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Infrastructure", "Services\ToDoList\ToDoList.Infrastructure\ToDoList.Infrastructure.csproj", "{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDoList.ReminderService", "ToDoList.ReminderService", "{F23B3953-6CAC-4A51-B834-1A4099B3DD2E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDoList.ReminderService", "Services\ToDoList.ReminderService", "{F23B3953-6CAC-4A51-B834-1A4099B3DD2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.ReminderWorker", "ToDoList.ReminderWorker\ToDoList.ReminderWorker.csproj", "{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.ReminderWorker", "Services\ToDoList.ReminderWorker\ToDoList.ReminderWorker.csproj", "{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

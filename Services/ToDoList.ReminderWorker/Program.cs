@@ -1,8 +1,9 @@
 using ToDoList.ReminderWorker;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((hostContext, services) =>
     {
+        services.AddWorkerServices(hostContext.Configuration);
         services.AddHostedService<Worker>();
     })
     .Build();
