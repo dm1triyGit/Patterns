@@ -10,6 +10,8 @@ const initialState: AppsState = {
     {
       name: 'Todolist',
       url: '/todos',
+      icon: 'ListAlt',
+      description: 'Тудушка тудушечка. Ну там создавай, удаляй и все такое.',
     },
   ],
 };

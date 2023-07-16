@@ -16,7 +16,6 @@ import {
   setToaster,
   toggleModalState,
 } from '@app/stores/slices';
-import { CardLoader } from './card-loader';
 import { useHandleComplete } from '../hooks';
 
 interface Props {
@@ -68,7 +67,6 @@ export const TodoCard = ({ todo }: Props): JSX.Element => {
       key={todo.id}
       elevation={4}
     >
-      {isLoading && <CardLoader />}
       <CardContent sx={{ display: 'grid', gridTemplateColumns: '4fr 1fr' }}>
         <Box className="card-left">
           {todo.createdDate && (
@@ -83,6 +81,11 @@ export const TodoCard = ({ todo }: Props): JSX.Element => {
           <Typography variant="h5">{todo.title}</Typography>
           {todo.comment && (
             <Typography variant="body2">{todo.comment}</Typography>
+          )}
+          {todo.reminderDate && (
+            <Typography sx={{ fontSize: 14, mt: 2 }} color="text.secondary">
+              Напоминание: {new Date(todo.reminderDate).toLocaleDateString()}
+            </Typography>
           )}
         </Box>
         <Box

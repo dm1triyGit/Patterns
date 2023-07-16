@@ -6,16 +6,17 @@ import { useAppSelector } from '@app/stores';
 import { useEffect } from 'react';
 import { TodoFormModel, todoSchema } from './todo-schema';
 import { useSubmitForm } from '../hooks';
+import { Dayjs } from 'dayjs';
 
 const defaultValues: TodoFormModel = {
   title: '',
   comment: '',
-  isCompleted: false,
+  reminderDate: new Date(),
 };
 
 export const TodoForm = (): JSX.Element => {
   const { editedItem } = useAppSelector(state => state.todos);
-  const { control, reset, formState, handleSubmit, setValue } =
+  const { control, reset, formState, handleSubmit, setValue, watch } =
     useForm<TodoFormModel>({
       defaultValues,
       resolver: yupResolver(todoSchema),
@@ -25,6 +26,7 @@ export const TodoForm = (): JSX.Element => {
     if (editedItem) {
       setValue('title', editedItem.title);
       setValue('comment', editedItem.comment);
+      setValue('reminderDate', editedItem.reminderDate);
     }
   }, [editedItem]);
 
@@ -32,6 +34,11 @@ export const TodoForm = (): JSX.Element => {
     todo: editedItem,
     resetForm: reset,
   });
+
+  const datePickerChangeHandler = (value: unknown) => {
+    const date = (value as Dayjs).toDate();
+    setValue('reminderDate', date);
+  };
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
@@ -62,6 +69,25 @@ export const TodoForm = (): JSX.Element => {
             : undefined
         }
       />
+
+      <InputComponent
+        type="date"
+        name="reminderDate"
+        id="reminderDate"
+        style={{ mb: 4 }}
+        formControl={control}
+        placeholoder="Дата напоминания"
+        dateValue={watch('reminderDate')}
+        onDateChange={datePickerChangeHandler}
+        minDateValue={new Date()}
+        error={!!formState.errors.reminderDate}
+        errorMessage={
+          !!formState.errors.reminderDate
+            ? formState.errors.reminderDate.message
+            : undefined
+        }
+      />
+
       <Button type="submit" variant="contained">
         Сохранить
       </Button>

@@ -49,7 +49,7 @@ export const todosSlice = createSlice({
       });
     },
     createNewTodo: (state, { payload }: PayloadAction<ITodo>) => {
-      state.list.push(payload);
+      state.list.unshift(payload);
     },
   },
 });
