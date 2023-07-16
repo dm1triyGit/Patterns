@@ -1,4 +1,5 @@
 using ToDoList.Application.Interfaces.Repositories;
+using ToDoList.ReminderWorker.Abstractions.Services;
 
 namespace ToDoList.ReminderWorker
 {
@@ -33,9 +34,18 @@ namespace ToDoList.ReminderWorker
         private async Task DoWork (CancellationToken cancellationToken)
         {
             using var scope = _serviceScopeFactory.CreateScope();
-            var repository = scope.ServiceProvider.GetRequiredService<IToDoListRepository>();
+            var toDoItemsService = scope.ServiceProvider.GetRequiredService<IToDoItemsService>();
 
-            var toDoList = await repository.GetToDoItemsAsync();
+            var itemsToRemind = await toDoItemsService.GetReminderItemsAsync(cancellationToken);
+
+            if (itemsToRemind == null || itemsToRemind.Length == 0)
+            {
+                return;
+            }
+
+            var reminderService = scope.ServiceProvider.GetRequiredService<IReminderService>();
+
+            await reminderService.RemindAsync(itemsToRemind, cancellationToken);
         }
     }
 }
