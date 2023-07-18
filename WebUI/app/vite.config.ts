@@ -7,8 +7,16 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      srcDir: 'src',
+      filename: 'sw.ts',
       workbox: {
-        globPatterns: ['**/*'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,webp,avif}'],
+        sourcemap: true,
+      },
+      strategies: 'injectManifest',
+      devOptions: {
+        enabled: true,
+        type: 'module',
       },
       includeAssets: ['**/*'],
       manifest: {
@@ -23,14 +31,26 @@ export default defineConfig({
         name: 'patterns project',
         icons: [
           {
-            src: '/android-chrome-192x192.png',
+            src: 'favicons/android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/android-chrome-512x512.png',
+            src: 'favicons/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
+          },
+          {
+            src: 'favicons/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'favicons/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
       },
