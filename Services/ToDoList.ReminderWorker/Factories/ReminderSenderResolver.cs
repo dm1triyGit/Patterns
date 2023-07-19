@@ -4,16 +4,16 @@ using ToDoList.ReminderWorker.Senders;
 
 namespace ToDoList.ReminderWorker.Factories
 {
-    public class ReminderSenderFactory
+    public class ReminderSenderResolver
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ReminderSenderFactory(IServiceProvider serviceProvider)
+        public ReminderSenderResolver(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public IReminderSender Create(ReminderTypes reminderType)
+        public IReminderSender GetSender(ReminderTypes reminderType)
         {
             switch (reminderType)
             {

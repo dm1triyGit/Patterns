@@ -7,18 +7,18 @@ namespace ToDoList.ReminderWorker.Services
 {
     public class ReminderService : IReminderService
     {
-        private readonly ReminderSenderFactory _senderFactory;
+        private readonly ReminderSenderResolver _senderResolver;
 
-        public ReminderService(ReminderSenderFactory senderFactory)
+        public ReminderService(ReminderSenderResolver senderResolver)
         {
-            _senderFactory = senderFactory;
+            _senderResolver = senderResolver;
         }
 
         public async Task RemindAsync(ToDoItem[] items, CancellationToken cancellationToken = default)
         {
             foreach (var item in items)
             {
-                var sender = _senderFactory.Create(ReminderTypes.Email);
+                var sender = _senderResolver.GetSender(ReminderTypes.Email);
 
                 await sender.SendReminderAsync(item, cancellationToken);
             }
