@@ -2,6 +2,6 @@
 {
     public interface IMailSenderSevice
     {
-        Task SendMailAsync(string email, string message, CancellationToken cancellationToken = default);
+        Task<bool> SendMailAsync(string email, string message, CancellationToken cancellationToken = default);
     }
 }

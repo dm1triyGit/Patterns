@@ -10,14 +10,16 @@ namespace ToDoList.ReminderWorker.Services
     {
         private readonly MailOptions _mailOptions;
         private readonly SmtpClientOptions _smtpClientOptions;
+        private readonly ILogger<MailSenderService> _logger;
 
-        public MailSenderService(IOptions<MailOptions> mailOptions, IOptions<SmtpClientOptions> smtpClientOptions)
+        public MailSenderService(IOptions<MailOptions> mailOptions, IOptions<SmtpClientOptions> smtpClientOptions, ILogger<MailSenderService> logger)
         {
             _mailOptions = mailOptions.Value;
             _smtpClientOptions = smtpClientOptions.Value;
+            _logger = logger;
         }
 
-        public async Task SendMailAsync(string email, string message, CancellationToken cancellationToken = default)
+        public async Task<bool> SendMailAsync(string email, string message, CancellationToken cancellationToken = default)
         {
             using var emailMessage = new MimeMessage();
 
@@ -29,12 +31,26 @@ namespace ToDoList.ReminderWorker.Services
                 Text = message
             };
 
-            using var client = new SmtpClient();
-            await client.ConnectAsync(_smtpClientOptions.Host, _smtpClientOptions.Port, true, cancellationToken);
-            await client.AuthenticateAsync(_mailOptions.SenderAddress, _mailOptions.SenderPassword, cancellationToken);
-            await client.SendAsync(emailMessage, cancellationToken);
+            var result = false;
 
-            await client.DisconnectAsync(true, cancellationToken);
+            using var client = new SmtpClient();
+            try
+            {
+                await client.ConnectAsync(_smtpClientOptions.Host, _smtpClientOptions.Port, true, cancellationToken);
+                await client.AuthenticateAsync(_mailOptions.SenderAddress, _mailOptions.SenderPassword, cancellationToken);
+                await client.SendAsync(emailMessage, cancellationToken);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+            }
+            finally
+            {
+                await client.DisconnectAsync(true, cancellationToken);
+            }
+
+            return result;
         }
     }
 }

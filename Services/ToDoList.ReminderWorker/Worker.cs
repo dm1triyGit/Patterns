@@ -1,4 +1,3 @@
-using ToDoList.Application.Interfaces.Repositories;
 using ToDoList.ReminderWorker.Abstractions.Services;
 
 namespace ToDoList.ReminderWorker

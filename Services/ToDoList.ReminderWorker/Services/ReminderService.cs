@@ -18,9 +18,14 @@ namespace ToDoList.ReminderWorker.Services
         {
             foreach (var item in items)
             {
-                var sender = _senderResolver.GetSender(ReminderTypes.Email);
+                var sender = _senderResolver.GetSender(ReminderTypes.Email); //TODO: использовать ReminderType из модели
 
-                await sender.SendReminderAsync(item, cancellationToken);
+                var success = await sender.SendReminderAsync(item, cancellationToken);
+
+                if (success)
+                {
+                    //отправить на шину данных событие об успешной отправке
+                }
             }
         }
     }
