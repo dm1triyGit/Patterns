@@ -12,10 +12,11 @@ namespace ToDoList.ReminderWorker.Services
         {
             _repository = repository;
         }
+
         public async Task<ToDoItem[]> GetReminderItemsAsync(CancellationToken cancellationToken = default)
         {
             return (await _repository.GetToDoItemsAsync(cancellationToken))
-                .Where(x => x.ReminderDate == DateTime.Now || x.ReminderDate != DateTime.Now)
+                .Where(x => x.ReminderDate == DateTime.Now || x.ReminderDate != DateTime.Now) //.Where(x => x.ReminderDate == DateTime.Now)
                 .ToArray();
         }
     }

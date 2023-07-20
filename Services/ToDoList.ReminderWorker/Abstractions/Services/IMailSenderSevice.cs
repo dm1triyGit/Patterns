@@ -1,9 +1,7 @@
-﻿using ToDoList.Domain.Entities;
-
-namespace ToDoList.ReminderWorker.Abstractions.Services
+﻿namespace ToDoList.ReminderWorker.Abstractions.Services
 {
     public interface IMailSenderSevice
     {
-        
+        Task SendMailAsync(string email, string message, CancellationToken cancellationToken = default);
     }
 }

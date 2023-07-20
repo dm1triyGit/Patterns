@@ -20,6 +20,7 @@ namespace ToDoList.ReminderWorker
             services.AddScoped<IToDoItemsService, ToDoItemsService>();
             services.AddScoped<IToDoListRepository, ToDoListRepository>();
             services.AddScoped<IReminderService, ReminderService>();
+            services.AddScoped<IMailSenderSevice, MailSenderService>();
 
             services.AddScoped<ReminderSenderResolver>();
 

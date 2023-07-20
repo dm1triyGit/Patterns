@@ -27,7 +27,7 @@ namespace ToDoList.ReminderWorker
                     _logger.LogError(ex.ToString());
                 }
 
-                await Task.Delay(60000, stoppingToken);
+                await Task.Delay(1000, stoppingToken);
             }
         }
 
