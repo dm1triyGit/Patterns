@@ -4,4 +4,5 @@ export interface ITodo {
   comment: string;
   createdDate: Date;
   isCompleted: boolean;
+  reminderDate?: Date;
 }

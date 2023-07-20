@@ -6,14 +6,14 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useEffect } from 'react';
-import { StyledSection } from '@app/shared/assets/styled-components';
 import AddIcon from '@mui/icons-material/Add';
-import { TodoForm, TodoModal, TodosList } from './components';
+import { StyledSection } from '@app/shared/assets/styled-components';
 import { useGetTodosQuery } from '@app/stores/api';
 import { Toaster } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/stores';
 import { saveTodos, toggleModalState } from '@app/stores/slices';
 import { Breakpoints } from '@app/shared/assets';
+import { TodoForm, TodoModal, TodosList } from './components';
 
 export const TodosPage = (): JSX.Element => {
   const { isLoading, isError, data, error, isFetching } = useGetTodosQuery();

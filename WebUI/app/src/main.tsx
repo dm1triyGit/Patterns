@@ -8,9 +8,12 @@ import App from '@app/app';
 
 const updateSW = registerSW({
   onNeedRefresh() {
-    if (confirm('New content available. Reload?')) {
+    if (confirm('Есть обновления приложения. Обновить?')) {
       updateSW(true);
     }
+  },
+  onOfflineReady() {
+    alert('Приложение будет работать оффлайн. По крайней мере постарается.');
   },
 });
 

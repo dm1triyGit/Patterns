@@ -5,11 +5,13 @@ import {
   StyledInputLabel,
   StyledInputWrapper,
 } from './components';
+import { DatePicker } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface Props<T extends FieldValues> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formControl: Control<T, any>;
-  type: 'text' | 'email' | 'password' | 'tel';
+  type: 'text' | 'email' | 'password' | 'tel' | 'date';
   name: Path<T>;
   id: string;
   style?: SxProps;
@@ -23,13 +25,19 @@ interface Props<T extends FieldValues> {
   disabled?: boolean;
   limit?: number;
   minHeight?: number;
+  onDateChange?: (value: Dayjs | null) => void;
+  dateValue?: Date;
+  minDateValue?: Date;
 }
 
 export const InputComponent = <T extends FieldValues>({
   errorMessage,
+  onDateChange,
   placeholoder,
+  minDateValue,
   formControl,
   className,
+  dateValue,
   multiline = false,
   minHeight,
   fullwidth,
@@ -42,6 +50,24 @@ export const InputComponent = <T extends FieldValues>({
   name,
   id,
 }: Props<T>): JSX.Element => {
+  if (type === 'date') {
+    return (
+      <StyledInputWrapper sx={style} className={className}>
+        {label && <StyledInputLabel htmlFor={id}>{label}</StyledInputLabel>}
+        <DatePicker
+          label={placeholoder}
+          sx={{ width: '100%' }}
+          onChange={onDateChange}
+          value={dayjs(dateValue)}
+          minDate={dayjs(minDateValue)}
+        />
+        {error && errorMessage ? (
+          <FormHelperText>{errorMessage}</FormHelperText>
+        ) : null}
+      </StyledInputWrapper>
+    );
+  }
+
   return (
     <Controller
       control={formControl}
