@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ToDoList.Configuration\ToDoList.Configuration.csproj" />
+    <ProjectReference Include="..\ToDoList\ToDoList.Infrastructure\ToDoList.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

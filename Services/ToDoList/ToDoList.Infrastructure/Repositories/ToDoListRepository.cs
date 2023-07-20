@@ -17,12 +17,12 @@ namespace ToDoList.Infrastructure.Repositories
             _logger = logger;
         }
 
-        public async Task<IReadOnlyCollection<ToDoItem>> GetToDoItemsAsync(CancellationToken cancellation)
+        public async Task<IReadOnlyCollection<ToDoItem>> GetToDoItemsAsync(CancellationToken cancellation = default)
         {
             return (await _context.ToDoItems.ToArrayAsync(cancellation)).AsReadOnly();
         }
 
-        public async Task<ToDoItem?> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public async Task<ToDoItem?> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation = default)
         {
             var createdItem = await _context.ToDoItems.FindAsync(item.Id);
             if (createdItem != null)
@@ -37,7 +37,7 @@ namespace ToDoList.Infrastructure.Repositories
             return created > 0 ? item : null;
         }
 
-        public async Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public async Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation = default)
         {
             var itemToUpdate = await _context.ToDoItems
                 .AsNoTracking()
@@ -55,7 +55,7 @@ namespace ToDoList.Infrastructure.Repositories
             return updated > 0;
         }
 
-        public async Task<bool> DeleteToDoItemAsync(int id, CancellationToken cancellation)
+        public async Task<bool> DeleteToDoItemAsync(int id, CancellationToken cancellation = default)
         {
             var item = await _context.ToDoItems.FindAsync(id);
             if (item == null)
