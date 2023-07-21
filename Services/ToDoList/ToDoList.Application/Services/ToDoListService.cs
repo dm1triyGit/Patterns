@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using ToDoList.Application.Interfaces.Repositories;
 using ToDoList.Application.Interfaces.Services;
+using ToDoList.Application.Models;
 using ToDoList.Domain.Entities;
 
 namespace ToDoList.Application.Services
@@ -9,19 +11,23 @@ namespace ToDoList.Application.Services
     {
         private readonly IToDoListRepository _toDoListRepository;
         private readonly ILogger<ToDoListService> _logger;
+        private readonly IMapper _mapper;
 
-        public ToDoListService(IToDoListRepository toDoListRepository, ILogger<ToDoListService> logger)
+        public ToDoListService(IToDoListRepository toDoListRepository, ILogger<ToDoListService> logger, IMapper mapper)
         {
             _toDoListRepository = toDoListRepository;
             _logger = logger;
+            _mapper = mapper;
         }
 
-        public Task<IReadOnlyCollection<ToDoItem>> GetToDoItemsAsync(CancellationToken cancellation)
+        public async Task<ToDoItemViewModel[]> GetToDoItemsAsync(CancellationToken cancellation)
         {
-            return _toDoListRepository.GetToDoItemsAsync(cancellation);
+            var items = await _toDoListRepository.GetToDoItemsAsync(cancellation);
+
+            return _mapper.Map<ToDoItemViewModel[]>(items);
         }
 
-        public async Task<ToDoItem?> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public async Task<ToDoItemViewModel?> CreateToDoItemAsync(ToDoItemViewModel item, CancellationToken cancellation)
         {
             if (item == null)
             {
@@ -29,7 +35,10 @@ namespace ToDoList.Application.Services
                 return null;
             }
 
-            return await _toDoListRepository.CreateToDoItemAsync(item, cancellation);
+            var itemToCreate = _mapper.Map<ToDoItem>(item);
+            var createdItem = await _toDoListRepository.CreateToDoItemAsync(itemToCreate, cancellation);
+
+            return _mapper.Map<ToDoItemViewModel>(createdItem);
         }
 
         public async Task<bool> DeleteToDoItemAsync(int id, CancellationToken cancellation)
@@ -43,7 +52,7 @@ namespace ToDoList.Application.Services
             return await _toDoListRepository.DeleteToDoItemAsync(id, cancellation);
         }
 
-        public async Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation)
+        public async Task<bool> UpdateToDoItemAsync(ToDoItemViewModel item, CancellationToken cancellation)
         {
             if (item == null)
             {
@@ -51,10 +60,12 @@ namespace ToDoList.Application.Services
                 return false;
             }
 
-            return await _toDoListRepository.UpdateToDoItemAsync(item, cancellation);
+            var itemToUpdate = _mapper.Map<ToDoItem>(item);
+
+            return await _toDoListRepository.UpdateToDoItemAsync(itemToUpdate, cancellation);
         }
 
-        public async Task<ToDoItem?> GetToDoItemByIdAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<ToDoItemViewModel?> GetToDoItemByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             var item = (await GetToDoItemsAsync(cancellationToken))
                 .FirstOrDefault(x => x.Id == id);

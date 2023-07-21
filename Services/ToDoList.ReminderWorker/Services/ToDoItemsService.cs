@@ -18,7 +18,7 @@ namespace ToDoList.ReminderWorker.Services
         {
             return (await _repository.GetToDoItemsAsync(cancellationToken))
                 .Where(x => !x.IsCompleted
-                    && x.ReminderDate.ToShortDateString() == DateTime.UtcNow.ToShortDateString())
+                    && x.ReminderDate?.ToShortDateString() == DateTime.UtcNow.ToShortDateString())
                 .ToArray();
         }
     }
