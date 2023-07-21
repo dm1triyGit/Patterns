@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ToDoList.Configuration
+namespace Configuration
 {
     public static class ServiceCollectionExtensions
     {

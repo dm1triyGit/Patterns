@@ -1,4 +1,4 @@
-﻿namespace ToDoList.Configuration.Options
+﻿namespace Configuration.Options
 {
     public class SmtpClientOptions
     {

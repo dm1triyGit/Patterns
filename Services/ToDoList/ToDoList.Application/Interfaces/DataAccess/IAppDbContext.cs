@@ -6,5 +6,6 @@ namespace ToDoList.Application.Interfaces.DataAccess
     public interface IAppDbContext
     {
         DbSet<ToDoItem> ToDoItems { get; }
+        DbSet<ReminderItem> ReminderItems { get; }
     }
 }

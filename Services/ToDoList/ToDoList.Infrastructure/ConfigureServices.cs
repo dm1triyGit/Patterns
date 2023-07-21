@@ -25,6 +25,7 @@ public static class ConfigureServices
         services.AddScoped<AppDbContextInitialiser>();
 
         services.AddScoped<IToDoListRepository, ToDoListRepository>();
+        services.AddScoped<IReminderItemRepository, ReminderItemRepository>();
 
         return services;
     }

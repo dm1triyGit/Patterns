@@ -17,6 +17,12 @@ namespace ToDoList.ReminderWorker
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("SQLiteConnection")));
 
+            //services.AddMassTransit(config => {
+            //    config.UsingRabbitMq((ctx, cfg) => {
+            //        cfg.Host(configuration["EventBusSettings:HostAddress"]);
+            //    });
+            //});
+
             services.AddScoped<IToDoItemsService, ToDoItemsService>();
             services.AddScoped<IToDoListRepository, ToDoListRepository>();
             services.AddScoped<IReminderService, ReminderService>();

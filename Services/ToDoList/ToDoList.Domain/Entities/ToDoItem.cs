@@ -1,6 +1,4 @@
-﻿using ToDoList.Domain.Enums;
-
-namespace ToDoList.Domain.Entities
+﻿namespace ToDoList.Domain.Entities
 {
     public class ToDoItem
     {
@@ -10,6 +8,7 @@ namespace ToDoList.Domain.Entities
         public bool IsCompleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ReminderDate { get; set; }
-        public ReminderStatuses ReminderStatus { get; set; }
+
+        public ReminderItem ReminderItem { get; set; }
     }
 }

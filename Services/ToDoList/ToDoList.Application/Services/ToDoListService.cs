@@ -53,5 +53,18 @@ namespace ToDoList.Application.Services
 
             return await _toDoListRepository.UpdateToDoItemAsync(item, cancellation);
         }
+
+        public async Task<ToDoItem?> GetToDoItemByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var item = (await GetToDoItemsAsync(cancellationToken))
+                .FirstOrDefault(x => x.Id == id);
+
+            if (item == null)
+            {
+                _logger.LogWarning($"There is no item with id = {id}");
+            }
+
+            return item;
+        }
     }
 }
