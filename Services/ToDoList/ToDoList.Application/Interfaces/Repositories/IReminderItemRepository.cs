@@ -5,5 +5,6 @@ namespace ToDoList.Application.Interfaces.Repositories
     public interface IReminderItemRepository
     {
         Task<bool> SaveReminderItemAsync(ReminderItem item, CancellationToken cancellationToken = default);
+        Task<ReminderItem?> GetReminderItemByIdAsync(int id, CancellationToken cancellationToken = default);
     }
 }

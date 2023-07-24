@@ -10,12 +10,18 @@ namespace ToDoList.Application.Services
     public class ToDoListService : IToDoListService
     {
         private readonly IToDoListRepository _toDoListRepository;
+        private readonly IReminderItemRepository _reminderItemRepository;
         private readonly ILogger<ToDoListService> _logger;
         private readonly IMapper _mapper;
 
-        public ToDoListService(IToDoListRepository toDoListRepository, ILogger<ToDoListService> logger, IMapper mapper)
+        public ToDoListService(
+            IToDoListRepository toDoListRepository,
+            IReminderItemRepository reminderItemRepository,
+            ILogger<ToDoListService> logger,
+            IMapper mapper)
         {
             _toDoListRepository = toDoListRepository;
+            _reminderItemRepository = reminderItemRepository;
             _logger = logger;
             _mapper = mapper;
         }
@@ -33,6 +39,18 @@ namespace ToDoList.Application.Services
             {
                 _logger.LogWarning("The Item being created must not be null!");
                 return null;
+            }
+
+            if (item.ReminderDate.HasValue)
+            {
+                var reminderItem = new ReminderItem
+                {
+                    Message = item.Title,
+                    ReminderDate = item.ReminderDate.Value,
+                    ToDoItemId = item.Id
+                };
+
+                await _reminderItemRepository.SaveReminderItemAsync(reminderItem);
             }
 
             var itemToCreate = _mapper.Map<ToDoItem>(item);

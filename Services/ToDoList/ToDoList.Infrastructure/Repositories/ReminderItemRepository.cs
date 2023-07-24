@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ToDoList.Application.Interfaces.Repositories;
 using ToDoList.Domain.Entities;
 using ToDoList.Infrastructure.DataAccess;
@@ -14,6 +15,18 @@ namespace ToDoList.Infrastructure.Repositories
         {
             _context = context;
             _logger = logger;
+        }
+
+        public async Task<ReminderItem?> GetReminderItemByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var item = await _context.ReminderItems.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+            if (item == null)
+            {
+                _logger.LogWarning($"The reminder item with id: {id} doesn't exist!");
+            }
+
+            return item;
         }
 
         public async Task<bool> SaveReminderItemAsync(ReminderItem item, CancellationToken cancellationToken = default)
