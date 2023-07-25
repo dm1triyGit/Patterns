@@ -13,9 +13,9 @@ namespace ToDoList.ReminderWorker.Senders
             _mailSenderSevice = mailSenderSevice;
         }
 
-        public async Task<bool> SendReminderAsync(ToDoItem item, CancellationToken cancellationToken = default)
+        public async Task<bool> SendReminderAsync(ReminderItem item, CancellationToken cancellationToken = default)
         {
-           return await _mailSenderSevice.SendMailAsync("login@yandex.ru", item.Title, cancellationToken); //TODO: брать email из юзера
+           return await _mailSenderSevice.SendMailAsync("login@yandex.ru", item.Message, cancellationToken); //TODO: брать email из юзера
         }
     }
 }

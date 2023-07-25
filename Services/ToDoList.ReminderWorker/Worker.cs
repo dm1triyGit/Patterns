@@ -33,7 +33,7 @@ namespace ToDoList.ReminderWorker
         private async Task DoWork (CancellationToken cancellationToken)
         {
             using var scope = _serviceScopeFactory.CreateScope();
-            var toDoItemsService = scope.ServiceProvider.GetRequiredService<IToDoItemsService>();
+            var toDoItemsService = scope.ServiceProvider.GetRequiredService<IReminderItemService>();
 
             var itemsToRemind = await toDoItemsService.GetReminderItemsAsync(cancellationToken);
 

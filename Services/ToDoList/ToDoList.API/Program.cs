@@ -1,5 +1,4 @@
 using NLog.Web;
-using ToDoList.API.EventBusConsumer;
 using ToDoList.API.Extensions;
 using ToDoList.Infrastructure.Utils;
 
@@ -15,20 +14,6 @@ builder.Services.AddSwaggerGen();
 builder.Logging.ClearProviders();
 builder.WebHost.UseNLog();
 builder.Services.AddCors();
-
-//builder.Services.AddMassTransit(config => {
-//    config.AddConsumer<ReminderSenderConsumer>();
-
-//    config.UsingRabbitMq((ctx, cfg) => {
-//        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
-
-//        cfg.ReceiveEndpoint(EventBusConstants.RemainderSenderQueue, c => {
-//            c.ConfigureConsumer<ReminderSenderConsumer>(ctx);
-//        });
-//    });
-//});
-
-builder.Services.AddScoped<ReminderSenderConsumer>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

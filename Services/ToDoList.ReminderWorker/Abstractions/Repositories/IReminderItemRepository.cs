@@ -1,8 +1,8 @@
 ﻿using ToDoList.Domain.Entities;
 
-namespace ToDoList.ReminderWorker.Abstractions.Services
+namespace ToDoList.ReminderWorker.Abstractions.Repositories
 {
-    public interface IToDoItemsService
+    public interface IReminderItemRepository
     {
         Task<ToDoItem[]> GetReminderItemsAsync(CancellationToken cancellationToken = default);
     }
