@@ -17,9 +17,26 @@ namespace ToDoList.Infrastructure.Repositories
             _logger = logger;
         }
 
-        public async Task<ReminderItem?> GetReminderItemByIdAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<bool> DeleteReminderItemAsync(int id, CancellationToken cancellationToken = default)
         {
-            var item = await _context.ReminderItems.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            var item = await _context.ReminderItems.FindAsync(id);
+            if (item == null)
+            {
+                _logger.LogWarning($"The Item with id: {id} doesn't exist!");
+                return false;
+            }
+
+            _context.ReminderItems.Remove(item);
+            var deleted = await _context.SaveChangesAsync(cancellationToken);
+
+            return deleted > 0;
+        }
+
+        public async Task<ReminderItem?> GetReminderItemByItemIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var item = await _context.ReminderItems
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.ToDoItemId == id, cancellationToken);
 
             if (item == null)
             {
@@ -42,6 +59,24 @@ namespace ToDoList.Infrastructure.Repositories
             var created = await _context.SaveChangesAsync(cancellationToken);
 
             return created > 0;
+        }
+
+        public async Task<bool> UpdateReminderItemAsync(ReminderItem item, CancellationToken cancellationToken = default)
+        {
+            var itemToUpdate = await _context.ReminderItems
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == item.Id, cancellationToken);
+
+            if (itemToUpdate == null)
+            {
+                _logger.LogWarning($"The Item with id: {item.Id} hasn't been created yet!");
+                return false;
+            }
+
+            _context.ReminderItems.Update(item);
+            var updated = await _context.SaveChangesAsync(cancellationToken);
+
+            return updated > 0;
         }
     }
 }

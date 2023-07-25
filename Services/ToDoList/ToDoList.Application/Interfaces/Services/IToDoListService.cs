@@ -8,6 +8,6 @@ namespace ToDoList.Application.Interfaces.Services
         Task<ToDoItemViewModel?> CreateToDoItemAsync(ToDoItemViewModel item, CancellationToken cancellationToken = default);
         Task<bool> UpdateToDoItemAsync(ToDoItemViewModel item, CancellationToken cancellationToken = default);
         Task<bool> DeleteToDoItemAsync(int id, CancellationToken cancellationToken = default);
-        Task<ToDoItemViewModel> GetToDoItemByIdAsync(int id, CancellationToken cancellationToken = default);
+        Task<ToDoItemViewModel?> GetToDoItemByIdAsync(int id, CancellationToken cancellationToken = default);
     }
 }

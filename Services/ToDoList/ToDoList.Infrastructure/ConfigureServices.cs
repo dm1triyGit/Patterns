@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using ToDoList.Application.Interfaces.Repositories;
 using ToDoList.Infrastructure.DataAccess;
 using ToDoList.Infrastructure.Repositories;
@@ -19,7 +20,10 @@ public static class ConfigureServices
         else
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(configuration.GetConnectionString("SQLiteConnection")));
+            {
+                options.UseSqlite(configuration.GetConnectionString("SQLiteConnection"));
+                options.LogTo(Console.WriteLine, LogLevel.Information);
+            });
         }
 
         services.AddScoped<AppDbContextInitialiser>();
