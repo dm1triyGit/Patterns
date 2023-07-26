@@ -3,6 +3,7 @@
     public enum ReminderStatuses
     {
         None,
-        Sended
+        Sended,
+        Error
     }
 }

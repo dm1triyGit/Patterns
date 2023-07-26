@@ -19,6 +19,8 @@ namespace ToDoList.ReminderWorker.Factories
             {
                 case ReminderTypes.Email:
                     return GetRequiredService<MailSender>();
+                case ReminderTypes.Abstract:
+                    return GetRequiredService<AbstractSender>();
                 default:
                     throw new ArgumentException($"Unsupported reminder type {reminderType}");
             }

@@ -1,4 +1,5 @@
 ﻿using ToDoList.Domain.Entities;
+using ToDoList.Domain.Enums;
 using ToDoList.ReminderWorker.Abstractions;
 using ToDoList.ReminderWorker.Abstractions.Services;
 
@@ -13,9 +14,11 @@ namespace ToDoList.ReminderWorker.Senders
             _mailSenderSevice = mailSenderSevice;
         }
 
-        public async Task<bool> SendReminderAsync(ReminderItem item, CancellationToken cancellationToken = default)
+        public async Task<ReminderStatuses> SendReminderAsync(ReminderItem item, CancellationToken cancellationToken = default)
         {
-           return await _mailSenderSevice.SendMailAsync("login@yandex.ru", item.Message, cancellationToken); //TODO: брать email из юзера
+            var success = await _mailSenderSevice.SendMailAsync("login@yandex.ru", item.Message, cancellationToken); //TODO: брать email из юзера
+
+            return success ? ReminderStatuses.Sended : ReminderStatuses.Error;
         }
     }
 }

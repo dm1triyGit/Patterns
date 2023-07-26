@@ -2,6 +2,7 @@
 {
     public enum ReminderTypes
     {
-        Email
+        Email,
+        Abstract
     }
 }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -17,9 +17,5 @@
     <ProjectReference Include="..\..\EventBus.Messages\EventBus.Messages.csproj" />
     <ProjectReference Include="..\ToDoList\ToDoList.Configuration\Configuration.csproj" />
     <ProjectReference Include="..\ToDoList\ToDoList.Domain\ToDoList.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\" />
   </ItemGroup>
 </Project>

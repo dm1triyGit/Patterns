@@ -6,15 +6,19 @@ namespace ToDoList.ReminderWorker
     {
         private readonly ILogger<Worker> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
+        private readonly IConfiguration _configuration;
 
-        public Worker(ILogger<Worker> logger, IServiceScopeFactory serviceScopeFactory)
+        public Worker(ILogger<Worker> logger, IServiceScopeFactory serviceScopeFactory, IConfiguration configuration)
         {
             _logger = logger;
             _serviceScopeFactory = serviceScopeFactory;
+            _configuration = configuration;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            var workerFrequency = _configuration.GetValue<int>("WorkerFrequency");
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 try
@@ -26,7 +30,7 @@ namespace ToDoList.ReminderWorker
                     _logger.LogError(ex.ToString());
                 }
 
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(workerFrequency, stoppingToken);
             }
         }
 

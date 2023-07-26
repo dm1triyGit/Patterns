@@ -1,13 +1,14 @@
 ﻿using ToDoList.Domain.Entities;
+using ToDoList.Domain.Enums;
 using ToDoList.ReminderWorker.Abstractions;
 
 namespace ToDoList.ReminderWorker.Senders
 {
     public class AbstractSender : IReminderSender
     {
-        public Task<bool> SendReminderAsync(ReminderItem item, CancellationToken cancellation = default)
+        public Task<ReminderStatuses> SendReminderAsync(ReminderItem item, CancellationToken cancellation = default)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(ReminderStatuses.Sended);
         }
     }
 }

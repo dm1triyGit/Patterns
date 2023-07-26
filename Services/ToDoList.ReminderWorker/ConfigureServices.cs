@@ -24,6 +24,8 @@ namespace ToDoList.ReminderWorker
             services.AddScoped<IReminderSender, MailSender>();
             services.AddScoped<IReminderSender, AbstractSender>();
 
+            services.AddSingleton(configuration);
+
             return services;
         }
     }
