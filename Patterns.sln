@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aggregator", "Aggregator", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDoList", "ToDoList", "{66BD651C-3AF1-4909-A86D-170076F8F4C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "OcelotApiGw\OcelotApiGw.csproj", "{CA9D0BBC-06F2-4FA4-8349-3062175B4AA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "Aggregator\OcelotApiGw\OcelotApiGw.csproj", "{CA9D0BBC-06F2-4FA4-8349-3062175B4AA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{433B030E-C0F3-4B50-B05C-089252A1A493}"
 EndProject
@@ -25,11 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDoList.ReminderService", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.ReminderWorker", "Services\ToDoList.ReminderWorker\ToDoList.ReminderWorker.csproj", "{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration", "Services\ToDoList\ToDoList.Configuration\Configuration.csproj", "{B3B56DE5-887A-4017-AAAA-1D99B238B7FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration", "Infrastructure\Configuration\Configuration.csproj", "{B3B56DE5-887A-4017-AAAA-1D99B238B7FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B00E06F7-F719-41E0-8B5F-2E7D6B3E0EA6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "EventBus.Messages\EventBus.Messages.csproj", "{ADC8634C-A7A6-4DB1-8C13-9179792E6E3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "Infrastructure\EventBus.Messages\EventBus.Messages.csproj", "{ADC8634C-A7A6-4DB1-8C13-9179792E6E3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

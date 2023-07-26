@@ -21,7 +21,8 @@ namespace ToDoList.ReminderWorker.Services
         {
             var items = _context.ReminderItems
                 .AsNoTracking()
-                .Where(x => x.ReminderStatus != ReminderStatuses.Sended) //x => x.ReminderDate == DateTime.Now && x.ReminderStatus != ReminderStatuses.Sended
+                .Where(x => x.ReminderDate.ToShortDateString() == DateTime.Now.ToShortDateString()
+                         && x.ReminderStatus != ReminderStatuses.Sended)
                 .ToArrayAsync(cancellationToken);
             return items;
         }
