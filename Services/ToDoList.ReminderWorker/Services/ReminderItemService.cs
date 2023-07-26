@@ -17,9 +17,9 @@ namespace ToDoList.ReminderWorker.Services
             _logger = logger;
         }
 
-        public Task<ReminderItem[]> GetReminderItemsAsync(CancellationToken cancellationToken = default)
+        public async Task<ReminderItem[]> GetReminderItemsAsync(CancellationToken cancellationToken = default)
         {
-            var items = _context.ReminderItems
+            var items =  await _context.ReminderItems
                 .AsNoTracking()
                 .Where(x => x.ReminderDate.ToShortDateString() == DateTime.Now.ToShortDateString()
                          && x.ReminderStatus != ReminderStatuses.Sended)

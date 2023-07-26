@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EventBus.Messages\EventBus.Messages.csproj" />
-    <ProjectReference Include="..\ToDoList\ToDoList.Configuration\Configuration.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Configuration\Configuration.csproj" />
     <ProjectReference Include="..\ToDoList\ToDoList.Domain\ToDoList.Domain.csproj" />
   </ItemGroup>
 </Project>
