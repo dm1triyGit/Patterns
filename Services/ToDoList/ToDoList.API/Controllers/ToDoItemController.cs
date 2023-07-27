@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.Interfaces.Services;
-using ToDoList.Domain.Entities;
+using ToDoList.Application.Models;
 
 namespace ToDoList.API.Controllers
 {
@@ -23,7 +23,7 @@ namespace ToDoList.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Create(ToDoItem item, CancellationToken cancellation)
+        public async Task<IActionResult> Create(ToDoItemViewModel item, CancellationToken cancellation)
         {
             var createdItem = await _toDoListService.CreateToDoItemAsync(item, cancellation);
 
@@ -33,7 +33,7 @@ namespace ToDoList.API.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> Update(ToDoItem item, CancellationToken cancellation)
+        public async Task<IActionResult> Update(ToDoItemViewModel item, CancellationToken cancellation)
         {
             var isUpdated = await _toDoListService.UpdateToDoItemAsync(item, cancellation);
 

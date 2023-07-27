@@ -17,12 +17,12 @@ namespace ToDoList.Infrastructure.Repositories
             _logger = logger;
         }
 
-        public async Task<IReadOnlyCollection<ToDoItem>> GetToDoItemsAsync(CancellationToken cancellation = default)
+        public async Task<IReadOnlyCollection<ToDoItem>> GetToDoItemsAsync(CancellationToken cancellationcancellationToken = default)
         {
-            return (await _context.ToDoItems.ToArrayAsync(cancellation)).AsReadOnly();
+            return (await _context.ToDoItems.ToArrayAsync(cancellationcancellationToken)).AsReadOnly();
         }
 
-        public async Task<ToDoItem?> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellation = default)
+        public async Task<ToDoItem?> CreateToDoItemAsync(ToDoItem item, CancellationToken cancellationToken = default)
         {
             var createdItem = await _context.ToDoItems.FindAsync(item.Id);
             if (createdItem != null)
@@ -31,17 +31,17 @@ namespace ToDoList.Infrastructure.Repositories
                 return null;
             }
 
-            await _context.ToDoItems.AddAsync(item, cancellation);
-            var created = await _context.SaveChangesAsync(cancellation);
+            await _context.ToDoItems.AddAsync(item, cancellationToken);
+            var created = await _context.SaveChangesAsync(cancellationToken);
 
             return created > 0 ? item : null;
         }
 
-        public async Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellation = default)
+        public async Task<bool> UpdateToDoItemAsync(ToDoItem item, CancellationToken cancellationToken = default)
         {
             var itemToUpdate = await _context.ToDoItems
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == item.Id, cancellation);
+                .FirstOrDefaultAsync(x => x.Id == item.Id, cancellationToken);
 
             if (itemToUpdate == null)
             {
@@ -50,12 +50,12 @@ namespace ToDoList.Infrastructure.Repositories
             }
 
             _context.ToDoItems.Update(item);
-            var updated = await _context.SaveChangesAsync(cancellation);
+            var updated = await _context.SaveChangesAsync(cancellationToken);
 
             return updated > 0;
         }
 
-        public async Task<bool> DeleteToDoItemAsync(int id, CancellationToken cancellation = default)
+        public async Task<bool> DeleteToDoItemAsync(int id, CancellationToken cancellationToken = default)
         {
             var item = await _context.ToDoItems.FindAsync(id);
             if (item == null)
@@ -65,7 +65,7 @@ namespace ToDoList.Infrastructure.Repositories
             }
 
             _context.ToDoItems.Remove(item);
-            var deleted = await _context.SaveChangesAsync(cancellation);
+            var deleted = await _context.SaveChangesAsync(cancellationToken);
 
             return deleted > 0;
         }

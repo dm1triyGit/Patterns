@@ -33,9 +33,9 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    //app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger)));
+    app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger)));
 }
-app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger)));
+app.UseExceptionHandler(errorApp => errorApp.Run(context => context.HandleException(app.Logger))); //TODO: удалить для релиза
 
 app.Map("/", () => "Hello I'm TodoServiceApi");
 

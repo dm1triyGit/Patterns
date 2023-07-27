@@ -4,6 +4,6 @@ namespace ToDoList.ReminderWorker.Abstractions.Services
 {
     public interface IReminderService
     {
-        Task RemindAsync(ToDoItem[] items, CancellationToken cancellationToken = default);
+        Task RemindAsync(ReminderItem[] items, CancellationToken cancellationToken = default);
     }
 }

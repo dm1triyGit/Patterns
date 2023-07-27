@@ -1,6 +1,6 @@
-﻿namespace ToDoList.Domain.Entities
+﻿namespace ToDoList.Application.Models
 {
-    public class ToDoItem
+    public class ToDoItemViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -8,7 +8,5 @@
         public bool IsCompleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ReminderDate { get; set; }
-
-        public ReminderItem ReminderItem { get; set; }
     }
 }

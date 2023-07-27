@@ -1,7 +1,7 @@
-﻿using MailKit.Net.Smtp;
+﻿using Configuration.Options;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using ToDoList.Configuration.Options;
 using ToDoList.ReminderWorker.Abstractions.Services;
 
 namespace ToDoList.ReminderWorker.Services

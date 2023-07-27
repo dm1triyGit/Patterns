@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aggregator", "Aggregator", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDoList", "ToDoList", "{66BD651C-3AF1-4909-A86D-170076F8F4C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "OcelotApiGw\OcelotApiGw.csproj", "{CA9D0BBC-06F2-4FA4-8349-3062175B4AA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "Aggregator\OcelotApiGw\OcelotApiGw.csproj", "{CA9D0BBC-06F2-4FA4-8349-3062175B4AA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{433B030E-C0F3-4B50-B05C-089252A1A493}"
 EndProject
@@ -25,7 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDoList.ReminderService", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.ReminderWorker", "Services\ToDoList.ReminderWorker\ToDoList.ReminderWorker.csproj", "{A59FB274-CAFA-433E-A59F-CD5B5D6602A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Configuration", "ToDoList.Configuration\ToDoList.Configuration.csproj", "{B3B56DE5-887A-4017-AAAA-1D99B238B7FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration", "Infrastructure\Configuration\Configuration.csproj", "{B3B56DE5-887A-4017-AAAA-1D99B238B7FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B00E06F7-F719-41E0-8B5F-2E7D6B3E0EA6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "Infrastructure\EventBus.Messages\EventBus.Messages.csproj", "{ADC8634C-A7A6-4DB1-8C13-9179792E6E3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +65,10 @@ Global
 		{B3B56DE5-887A-4017-AAAA-1D99B238B7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3B56DE5-887A-4017-AAAA-1D99B238B7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3B56DE5-887A-4017-AAAA-1D99B238B7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC8634C-A7A6-4DB1-8C13-9179792E6E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC8634C-A7A6-4DB1-8C13-9179792E6E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC8634C-A7A6-4DB1-8C13-9179792E6E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC8634C-A7A6-4DB1-8C13-9179792E6E3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,7 +82,8 @@ Global
 		{8A93BF0B-2E1A-4118-96AB-6586F7E5F4BE} = {66BD651C-3AF1-4909-A86D-170076F8F4C2}
 		{F23B3953-6CAC-4A51-B834-1A4099B3DD2E} = {433B030E-C0F3-4B50-B05C-089252A1A493}
 		{A59FB274-CAFA-433E-A59F-CD5B5D6602A8} = {F23B3953-6CAC-4A51-B834-1A4099B3DD2E}
-		{B3B56DE5-887A-4017-AAAA-1D99B238B7FA} = {66BD651C-3AF1-4909-A86D-170076F8F4C2}
+		{B3B56DE5-887A-4017-AAAA-1D99B238B7FA} = {B00E06F7-F719-41E0-8B5F-2E7D6B3E0EA6}
+		{ADC8634C-A7A6-4DB1-8C13-9179792E6E3A} = {B00E06F7-F719-41E0-8B5F-2E7D6B3E0EA6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8256053D-5974-45BE-AE9D-173D9A0D6DFB}

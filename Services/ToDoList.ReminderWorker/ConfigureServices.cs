@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToDoList.Application.Interfaces.Repositories;
-using ToDoList.Infrastructure.DataAccess;
-using ToDoList.Infrastructure.Repositories;
 using ToDoList.ReminderWorker.Abstractions;
 using ToDoList.ReminderWorker.Abstractions.Services;
+using ToDoList.ReminderWorker.DataAccess;
 using ToDoList.ReminderWorker.Factories;
 using ToDoList.ReminderWorker.Senders;
 using ToDoList.ReminderWorker.Services;
@@ -17,8 +15,7 @@ namespace ToDoList.ReminderWorker
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("SQLiteConnection")));
 
-            services.AddScoped<IToDoItemsService, ToDoItemsService>();
-            services.AddScoped<IToDoListRepository, ToDoListRepository>();
+            services.AddScoped<IReminderItemService, ReminderItemService>();
             services.AddScoped<IReminderService, ReminderService>();
             services.AddScoped<IMailSenderSevice, MailSenderService>();
 
@@ -26,6 +23,8 @@ namespace ToDoList.ReminderWorker
 
             services.AddScoped<IReminderSender, MailSender>();
             services.AddScoped<IReminderSender, AbstractSender>();
+
+            services.AddSingleton(configuration);
 
             return services;
         }
