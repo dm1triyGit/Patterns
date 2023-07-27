@@ -21,7 +21,7 @@ namespace ToDoList.ReminderWorker.Services
         {
             var items =  await _context.ReminderItems
                 .AsNoTracking()
-                .Where(x => x.ReminderDate.ToShortDateString() == DateTime.Now.ToShortDateString()
+                .Where(x => x.ReminderDate.Date == DateTime.Now.Date
                          && x.ReminderStatus != ReminderStatuses.Sended)
                 .ToArrayAsync(cancellationToken);
             return items;
