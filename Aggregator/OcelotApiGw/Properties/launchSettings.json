@@ -7,6 +7,12 @@
         "ASPNETCORE_ENVIRONMENT": "local"
       },
       "applicationUrl": "http://localhost:8081"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true
     }
   }
 }

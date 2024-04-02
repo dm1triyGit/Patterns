@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  ocelotapigw:
+    container_name: ocelotapigw
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - todolist.api
+    ports:
+      - "8081:80"
+
+  todolist.api:
+    container_name: todolist.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:80"
+

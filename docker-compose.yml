@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  ocelotapigw:
+    image: ${DOCKER_REGISTRY-}ocelotapigw
+    build:
+      context: .
+      dockerfile: Aggregator\OcelotApiGw\Dockerfile
+
+  todolist.api:
+    image: ${DOCKER_REGISTRY-}todolistapi
+    build:
+      context: .
+      dockerfile: Services\ToDoList\ToDoList.API\Dockerfile
+
