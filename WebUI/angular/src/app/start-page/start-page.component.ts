@@ -6,6 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './start-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StartPageComponent {
-  title = 'angular-app';
-}
+export class StartPageComponent {}
