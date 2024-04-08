@@ -1,26 +1,28 @@
 .parallax {
-  background: url('/assets/images/parallax1.jpg') fixed no-repeat center center;
-  -webkit-background-size: cover;
-  background-size: cover;
-  position: relative;
-  color: #fff;
+    background: fixed no-repeat center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    position: relative;
+    color: #fff;
 }
 .big-content {
-  height: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
 }
 .parallax .inner {
-  padding-top: 130px;
-  padding-bottom: 130px;
+    padding-top: 130px;
+    padding-bottom: 130px;
 }
 .parallax a {
-  color: #ef5f60;
+    color: #ef5f60;
 }
 .parallax h2 {
-  font-size: 28px;
-  line-height: 34px;
+    font-size: 28px;
+    line-height: 34px;
 }
 .parallax .lead {
-  color: #fff;
+    color: #fff;
 }
 .parallax h1,
 .parallax h2,
@@ -28,8 +30,91 @@
 .parallax h4,
 .parallax h5,
 .parallax h6 {
-  color: #fff;
+    color: #fff;
 }
-.parallax.parallax3 {
-  background-image: url('/assets/images/parallax3.jpg');
+
+@media (max-width: 767px) {
+    .about_area {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+}
+
+.about_area {
+    padding-top: 150px;
+    padding-bottom: 120px;
+}
+
+@media (max-width: 767px) {
+    .about_area .about_info {
+        padding-left: 0;
+    }
+    .about_area .about_info {
+        padding-left: 68px;
+        margin-bottom: 30px;
+    }
+}
+
+.subscribe_part {
+    background-color: #4b3049;
+}
+.section_padding {
+    padding: 200px 0px;
+}
+
+.subscribe_part .subscribe_part_content {
+    text-align: center;
+}
+
+.subscribe_part .subscribe_form {
+    margin: 0 auto;
+    margin-top: 45px;
+    position: relative;
+    max-width: 558px;
+}
+
+.subscribe_part .subscribe_form input {
+    border: 1px solid #fff;
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 50px;
+    padding: 19px 30px;
+    line-height: 20px;
+}
+
+.subscribe_part .subscribe_form .btn_1 {
+    padding: 15px 30px;
+    line-height: 16px;
+    border-radius: 50px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.btn_1 {
+    display: inline-block;
+    padding: 17px 50px;
+    border-radius: 5px;
+    background-color: #b08ead;
+    border: 2px solid #b08ead;
+    font-size: 15px;
+    font-weight: 500;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    text-transform: capitalize;
+    color: #fff;
+}
+
+.subscribe_part .subscribe_part_content h2,
+.subscribe_part .subscribe_part_content p {
+    color: #fff;
+}
+
+.random-content {
+  display: flex;
+  align-self: center;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 2rem;
 }

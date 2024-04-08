@@ -1,9 +1,18 @@
 {
-  "trailingComma": "all",
-  "tabWidth": 2,
-  "semi": true,
+  "printWidth": 120,
   "singleQuote": true,
+  "useTabs": false,
+  "tabWidth": 4,
+  "semi": true,
   "bracketSpacing": true,
-  "printWidth": 100,
-  "endOfLine": "crlf"
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "options": {
+        "printWidth": 120
+      }
+    }
+  ]
 }

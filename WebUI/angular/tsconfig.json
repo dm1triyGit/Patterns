@@ -22,7 +22,12 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@app-environment": ["environments/environment"],
+      "@app-shared/*": ["app/shared/*"],
+    }
   },
   "angularCompilerOptions": {
     "disableTypeScriptVersionCheck": true,
