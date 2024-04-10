@@ -37,6 +37,14 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "sourceMap": true
+            },
             "production": {
               "fileReplacements": [
                 {
