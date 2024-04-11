@@ -7,9 +7,8 @@ import { MainMenuModule } from './layout/main-menu';
 import { FooterModule } from './layout/footer';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, MainMenuModule, FooterModule],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [BrowserModule, AppRoutingModule, MainMenuModule, FooterModule],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
-

@@ -13,11 +13,9 @@ import {
     takeWhile,
 } from 'rxjs';
 import { WebSocketSubject, WebSocketSubjectConfig } from 'rxjs/webSocket';
-import { webSocketConfig } from './websocket.config';
+import { WEBSOCKET_CONFIG } from './websocket.config';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class WebsocketService implements IWebsocketService, OnDestroy {
     public status$: Observable<boolean>;
 
@@ -35,12 +33,13 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
     private reconnectAttempts = this.wsConfig.reconnectAttempts || 10;
     private isConnected = false;
 
-    constructor(@Inject(webSocketConfig) private wsConfig: WebSocketConfig) {
+    constructor(@Inject(WEBSOCKET_CONFIG) private wsConfig: WebSocketConfig) {
         this.init();
     }
 
     ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
+        this.websocketSub.unsubscribe();
+        this.statusSub.unsubscribe();
     }
 
     public on<T>(event: string): Observable<T> | undefined {

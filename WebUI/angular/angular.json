@@ -6,6 +6,11 @@
     "angular-app": {
       "projectType": "application",
       "schematics": {
+        "@schematics/angular": {
+          "component": {
+            "changeDetection": "OnPush"
+          }
+        },
         "@schematics/angular:component": {
           "style": "scss"
         },
@@ -72,24 +77,28 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-app:build",
+            "buildTarget": "angular-app:build",
             "port": 5200
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-app:build:production"
+              "buildTarget": "angular-app:build:production"
+            },
+            "development": {
+              "buildTarget": "angular-app:build:development"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-app:build"
+            "buildTarget": "angular-app:build"
           }
         },
         "test": {

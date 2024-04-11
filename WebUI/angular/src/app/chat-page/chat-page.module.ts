@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatPageComponent } from './chat-page.component';
-import { WebSocketModule } from '@app-shared/modules';
-import { environment } from '@app-environment';
+import { ChatPageRoutingModule } from './chat-page-routing.module';
 
 @NgModule({
+    imports: [CommonModule, ChatPageRoutingModule],
     declarations: [ChatPageComponent],
-    imports: [CommonModule, WebSocketModule.config({ url: environment.chatUrl })],
+    exports: [ChatPageComponent],
 })
 export class ChatPageModule {}

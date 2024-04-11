@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { WebsocketService } from '@app-shared/modules/websocket/websocket.service';
+import { WebsocketService } from '@app-shared/services';
 
 @Component({
     selector: 'app-chat-page',
