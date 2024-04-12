@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { WebsocketService } from '@app-shared/services';
 
 @Component({
     selector: 'app-chat-page',
@@ -8,5 +7,5 @@ import { WebsocketService } from '@app-shared/services';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatPageComponent {
-    constructor(private readonly websocketService: WebsocketService) {}
+    constructor() {}
 }
