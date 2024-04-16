@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   IMAGE_PATH: '/assets/images',
-  chatWsUrl: 'ws://localhost:6759'
+  CHAT_API: 'http://localhost:5118/chat'
 };
 
 /*

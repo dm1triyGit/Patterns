@@ -1,1 +1,1 @@
-export * from './chat-window.service';
+export * from './chat-hub.service';

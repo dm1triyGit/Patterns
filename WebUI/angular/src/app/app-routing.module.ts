@@ -8,7 +8,7 @@ const routes: Routes = [
     { path: 'start', component: StartPageComponent },
     {
         path: 'chat',
-        providers: [{ provide: WEBSOCKET_CONFIG, useValue: { url: environment.chatWsUrl } }, WebsocketService],
+        providers: [{ provide: WEBSOCKET_CONFIG, useValue: { url: environment.CHAT_API } }, WebsocketService],
         loadChildren: () => import('./chat-page/chat-page.module').then(m => m.ChatPageModule),
     },
     { path: '**', redirectTo: '/start', pathMatch: 'full' },

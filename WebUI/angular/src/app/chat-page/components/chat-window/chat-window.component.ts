@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { WebsocketService } from '@app-shared/services';
-import { IWsMessage } from '@app-shared/services/websocket/websocket.types';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChatHubServise } from '../../services';
+import { USER_NAME } from '../../tokens';
+import { UserMessage } from '../../types';
 
 @Component({
     selector: 'app-chat-window',
@@ -9,11 +10,18 @@ import { IWsMessage } from '@app-shared/services/websocket/websocket.types';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatWindowComponent {
-    constructor(private readonly websocketService: WebsocketService) {
-        this.websocketService.on<IWsMessage<string>[]>('messages')?.subscribe((messages: IWsMessage<string>[]) => {
-            console.log(messages);
+    public readonly userMessages$ = this.chatHubService.userMessages$;
 
-            this.websocketService.send('text', 'Test Text!');
-        });
+    constructor(
+        private readonly chatHubService: ChatHubServise,
+        @Inject(USER_NAME) private readonly userName: string,
+    ) {}
+
+    public send(): void {
+        this.chatHubService.send('mes', this.userName);
+    }
+
+    public isOutgoingMessage({ name }: UserMessage): boolean {
+        return name === this.userName;
     }
 }
